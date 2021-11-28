@@ -9,6 +9,9 @@ import model.Customer;
 
 import java.util.stream.IntStream;
 
+import jdbc.Jdbc;
+
+
 public class CustomerDao {
 	/*
 	 * This class handles all the database operations related to the customer table
@@ -31,22 +34,50 @@ public class CustomerDao {
 		 */
 		
 		/*Sample data begins*/
-		for (int i = 0; i < 10; i++) {
-			Customer customer = new Customer();
-			customer.setCustomerID("111-11-1111");
-			customer.setAddress("123 Success Street");
-			customer.setLastName("Lu");
-			customer.setFirstName("Shiyong");
-			customer.setCity("Stony Brook");
-			customer.setState("NY");
-			customer.setEmail("shiyong@cs.sunysb.edu");
-			customer.setZipCode(11790);
-			customer.setTelephone("5166328959");
-			customer.setCreditCard("1234567812345678");
-			customer.setRating(1);
-			customers.add(customer);			
+		//Original
+//		for (int i = 0; i < 10; i++) {
+//			Customer customer = new Customer();
+//			customer.setCustomerID("111-11-1111");
+//			customer.setAddress("123 Success Street");
+//			customer.setLastName("Lu");
+//			customer.setFirstName("Shiyong");
+//			customer.setCity("Stony Brook");
+//			customer.setState("NY");
+//			customer.setEmail("shiyong@cs.sunysb.edu");
+//			customer.setZipCode(11790);
+//			customer.setTelephone("5166328959");
+//			customer.setCreditCard("1234567812345678");
+//			customer.setRating(1);
+//			customers.add(customer);			
+//		}
+		//New
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			Connection con=DriverManager.getConnection("jdbc:mysql://localhost:8081/cse305pa3","root","root");
+			Statement st=con.createStatement();
+			ResultSet rs =st.executeQuery("select * from customer,person");
+//			ResultSet rs = Jdbc.newStatement("select * from customer,person");
+			/*Sample data ends*/
+			while(rs.next()) {
+				Customer customer=new Customer();
+				customer.setCustomerID(rs.getString("SSN"));
+				customer.setEmail(rs.getString("Email"));
+				customer.setAddress(rs.getString("Address"));
+				customer.setLastName(rs.getString("LastName"));
+				customer.setFirstName(rs.getString("FirstName"));
+				customer.setCity(rs.getString("City"));
+				customer.setState(rs.getString("State"));
+				customer.setZipCode(rs.getInt("ZipCode"));
+				customer.setTelephone(rs.getString("Telephone"));
+				customer.setCreditCard(rs.getString("CreditCard"));
+				customer.setRating(rs.getInt("Rating"));
+				customers.add(customer);
+			}
 		}
-		/*Sample data ends*/
+		catch(Exception e) {
+			System.out.println(e);
+		}
+		
 		
 		return customers;
 	}
@@ -217,3 +248,5 @@ public class CustomerDao {
 	}
 
 }
+
+
