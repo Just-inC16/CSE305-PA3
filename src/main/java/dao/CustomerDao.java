@@ -57,11 +57,12 @@ public class CustomerDao {
 			Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/cse305pa3?"+"user=root&password=40302000");
 			System.out.println("*************Successful Connection **************");
 			Statement st=con.createStatement();
-			ResultSet rs =st.executeQuery("select * from customer,person");
+			ResultSet rs =st.executeQuery("select * from customer");
 //			ResultSet rs = Jdbc.newStatement("select * from customer,person");
 			/*Sample data ends*/
 			while(rs.next()) {
 				Customer customer=new Customer();
+				customer.setCustomerID(rs.getString("CustomerId"));
 				customer.setEmail(rs.getString("Email"));
 				//Is Password necessary?
 				customer.setFirstName(rs.getString("FirstName"));
@@ -71,7 +72,7 @@ public class CustomerDao {
 				customer.setState(rs.getString("State"));
 				customer.setZipCode(rs.getInt("ZipCode"));
 				customer.setTelephone(rs.getString("Telephone"));
-				customer.setCustomerID(rs.getString("SSN"));
+//				customer.setCustomerID(rs.getString("SSN"));
 				customer.setCreditCard(rs.getString("CreditCard"));
 				customer.setRating(rs.getInt("Rating"));
 				customers.add(customer);

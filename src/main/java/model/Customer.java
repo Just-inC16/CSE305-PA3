@@ -18,6 +18,9 @@ public class Customer {
 	private String email;
 	private String creditCard;
 	private int rating;
+	//Added properties
+//	private String password;
+//	private String SSN;
 	public String getCustomerID() {
 		return customerID;
 	}
