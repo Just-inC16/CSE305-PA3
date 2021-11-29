@@ -11,8 +11,8 @@ public class Jdbc {
 		Statement st=null;
 		ResultSet rs = null;
 		try {
-			Class.forName("com.mysql.jdbc.Driver");
-			con=DriverManager.getConnection("jdbc:mysql://localhost:8081/cse305pa3","root","root");
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			con=DriverManager.getConnection("jdbc:mysql://localhost:3306/cse305pa3?user=root&password=40302000");
 			st=con.createStatement();
 			rs =st.executeQuery(queryStatement);
 			
