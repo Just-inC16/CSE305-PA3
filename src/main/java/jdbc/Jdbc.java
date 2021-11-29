@@ -20,11 +20,11 @@ public class Jdbc {
 		catch(Exception e) {
 			System.out.println(e);
 		}
-		finally {
-			try { rs.close(); } catch (Exception e) { /* Ignored */ }
-		    try { st.close(); } catch (Exception e) { /* Ignored */ }
-		    try { con.close(); } catch (Exception e) { /* Ignored */ }
-		}
+//		finally {
+//			try { rs.close(); } catch (Exception e) { /* Ignored */ }
+//		    try { st.close(); } catch (Exception e) { /* Ignored */ }
+//		    try { con.close(); } catch (Exception e) { /* Ignored */ }
+//		}
 		return rs;
 		
 	}
