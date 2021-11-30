@@ -278,9 +278,9 @@ public class CustomerDao {
 //		return "111-11-1111";
 		//NEW
 		System.out.println("*******Get Customer by ID based on email addr**********");
-		String foundCustomerID="";
+		String foundCustomerID=null;
 		try {
-			String queryStatement="select customerID from customer where email='"+username+"'";
+			String queryStatement="Select customerID from customer where email='"+username+"'";
 			System.out.println(queryStatement);
 			ResultSet rs = Jdbc.newStatement(queryStatement);
 			foundCustomerID= rs.getString("CustomerID");
