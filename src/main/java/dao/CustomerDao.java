@@ -51,6 +51,7 @@ public class CustomerDao {
 //			customers.add(customer);			
 //		}
 		//New
+		System.out.println("*******Get All Customers based on keywords**********");
 		try {
 //			Class.forName("com.mysql.cj.jdbc.Driver");
 ////			Connection con=DriverManager.getConnection("jdbc:mysql://localhost:8081/cse305pa3","root","40302000");
@@ -58,7 +59,8 @@ public class CustomerDao {
 //			System.out.println("*************Successful Connection **************");
 //			Statement st=con.createStatement();
 //			ResultSet rs =st.executeQuery("select * from customer");
-			ResultSet rs = Jdbc.newStatement("select * from customer");
+			String queryStatement="select * from customer where customerID LIKE '%"+searchKeyword+"%'";
+			ResultSet rs = Jdbc.newStatement(queryStatement);
 			/*Sample data ends*/
 			while(rs.next()) {
 				Customer customer=new Customer();
@@ -96,11 +98,17 @@ public class CustomerDao {
 
 
 		/*Sample data begins*/
+		//Old
+//		Customer customer = new Customer();
+//		customer.setCustomerID("111-11-1111");
+//		customer.setLastName("Lu");
+//		customer.setFirstName("Shiyong");
+//		customer.setEmail("shiyong@cs.sunysb.edu");
+		//New
+		System.out.println("*******Get Customer with highest revenue**********");
 		Customer customer = new Customer();
-		customer.setCustomerID("111-11-1111");
-		customer.setLastName("Lu");
-		customer.setFirstName("Shiyong");
-		customer.setEmail("shiyong@cs.sunysb.edu");
+		ResultSet rs = Jdbc.newStatement("select * from customer");
+		
 		/*Sample data ends*/
 	
 		return customer;
@@ -119,17 +127,56 @@ public class CustomerDao {
 		List<Customer> customers = new ArrayList<Customer>();
 		
 		/*Sample data begins*/
-		for (int i = 0; i < 10; i++) {
-			Customer customer = new Customer();
-			customer.setCustomerID("111-11-1111");
-			customer.setAddress("123 Success Street");
-			customer.setLastName("Lu");
-			customer.setFirstName("Shiyong");
-			customer.setCity("Stony Brook");
-			customer.setState("NY");
-			customer.setEmail("shiyong@cs.sunysb.edu");
-			customer.setZipCode(11790);
-			customers.add(customer);			
+		//Old
+//		for (int i = 0; i < 10; i++) {
+//			Customer customer = new Customer();
+//			customer.setCustomerID("111-11-1111");
+//			customer.setAddress("123 Success Street");
+//			customer.setLastName("Lu");
+//			customer.setFirstName("Shiyong");
+//			customer.setCity("Stony Brook");
+//			customer.setState("NY");
+//			customer.setEmail("shiyong@cs.sunysb.edu");
+//			customer.setZipCode(11790);
+//			customers.add(customer);			
+//		}
+		//New
+		System.out.println("*******Get all customers' mailing information**********");
+		try {
+//			Class.forName("com.mysql.cj.jdbc.Driver");
+////			Connection con=DriverManager.getConnection("jdbc:mysql://localhost:8081/cse305pa3","root","40302000");
+//			Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/cse305pa3?"+"user=root&password=40302000");
+//			System.out.println("*************Successful Connection **************");
+//			Statement st=con.createStatement();
+//			ResultSet ss =Jdbc.newStatement("select  from customer");
+			ResultSet rs = Jdbc.newStatement("select "
+											+ "customer.customerID,"
+											+ "customer.firstName,"
+											+ "customer.lastName,"
+											+ "customer.Address,"
+											+ "customer.City,"
+											+ "customer.State,"
+											+ "customer.zipCode,"
+											+ "customer.Email"
+											+ " from customer");
+			/*Sample data ends*/
+			while(rs.next()) {
+//			while(ss.next()) {
+				Customer customer=new Customer();
+				
+				customer.setCustomerID(rs.getString("CustomerId"));
+				customer.setFirstName(rs.getString("firstName"));
+				customer.setLastName(rs.getString("lastName"));
+				customer.setAddress(rs.getString("Address"));
+				customer.setCity(rs.getString("City"));
+				customer.setState(rs.getString("State"));
+				customer.setZipCode(rs.getInt("ZipCode"));
+				customer.setEmail(rs.getString("Email"));
+				customers.add(customer);
+			}
+		}
+		catch(Exception e) {
+			System.out.println(e);
 		}
 		/*Sample data ends*/
 		
@@ -146,18 +193,48 @@ public class CustomerDao {
 		 */
 		
 		/*Sample data begins*/
-		Customer customer = new Customer();
-		customer.setCustomerID("111-11-1111");
-		customer.setAddress("123 Success Street");
-		customer.setLastName("Lu");
-		customer.setFirstName("Shiyong");
-		customer.setCity("Stony Brook");
-		customer.setState("NY");
-		customer.setEmail("shiyong@cs.sunysb.edu");
-		customer.setZipCode(11790);
-		customer.setTelephone("5166328959");
-		customer.setCreditCard("1234567812345678");
-		customer.setRating(1);
+		//Old
+//		Customer customer = new Customer();
+//		customer.setCustomerID("111-11-1111");
+//		customer.setAddress("123 Success Street");
+//		customer.setLastName("Lu");
+//		customer.setFirstName("Shiyong");
+//		customer.setCity("Stony Brook");
+//		customer.setState("NY");
+//		customer.setEmail("shiyong@cs.sunysb.edu");
+//		customer.setZipCode(11790);
+//		customer.setTelephone("5166328959");
+//		customer.setCreditCard("1234567812345678");
+//		customer.setRating(1);
+		//New
+		Customer customer=null;
+		System.out.println("*******Get Customer by ID**********");
+		try {
+//			Class.forName("com.mysql.cj.jdbc.Driver");
+////			Connection con=DriverManager.getConnection("jdbc:mysql://localhost:8081/cse305pa3","root","40302000");
+//			Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/cse305pa3?"+"user=root&password=40302000");
+//			System.out.println("*************Successful Connection **************");
+//			Statement st=con.createStatement();
+//			ResultSet ss =Jdbc.newStatement("select  from customer");
+			ResultSet rs = Jdbc.newStatement("select * from customer where customerID='customerID'");
+			while(rs.next()) {
+//			while(ss.next()) {
+				customer=new Customer();
+				
+				customer.setCustomerID(rs.getString("CustomerId"));
+				customer.setFirstName(rs.getString("firstName"));
+				customer.setLastName(rs.getString("lastName"));
+				customer.setAddress(rs.getString("Address"));
+				customer.setCity(rs.getString("City"));
+				customer.setState(rs.getString("State"));
+				customer.setZipCode(rs.getInt("ZipCode"));
+				customer.setEmail(rs.getString("Email"));
+				
+			}
+		}
+		catch(Exception e) {
+			System.out.println(e);
+		}
 		/*Sample data ends*/
 		
 		return customer;
