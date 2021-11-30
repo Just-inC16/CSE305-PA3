@@ -20,6 +20,7 @@ public class Employee {
 	private String email;
 	private String telephone;
 	private String revenue;
+	
 	public String getRevenue() {
 		return revenue;
 	}

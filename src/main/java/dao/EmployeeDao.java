@@ -1,8 +1,10 @@
 package dao;
 
+import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
+import jdbc.Jdbc;
 import model.Customer;
 import model.Employee;
 
@@ -22,26 +24,29 @@ public class EmployeeDao {
 		 */
 		
 		/*Sample data begins*/
-		System.out.println("*******Add a customer **********");
+		System.out.println("*******Add an Employee **********");
 		try {
-			String queryStatement="INSERT INTO Customer"
-					+ "(customerID, firstName, lastName, Address, City, State, zipCode, telephone, email, creditCard, rating)"
+			String queryStatement="INSERT INTO Employee"
+					+ "(employeeID, startDate, hourlyRate, level_, firstName, lastName, address, city, state, zipCode, email, telephone, revenue)"
 					+ " VALUES "
 					+ "('"
-					+ customer.getCustomerID()+"', '"
-					+ customer.getFirstName()+"', '"
-					+ customer.getLastName()+"', '"
-					+ customer.getAddress()+"', '"
-					+ customer.getCity()+"', '"
-					+ customer.getState()+"', "
-					+ customer.getZipCode()+", '"
-					+ customer.getTelephone()+"', '"
-					+ customer.getEmail()+"', '"
-					+ customer.getCreditCard()+"', "
-					+ customer.getRating()
+					+ employee.getEmployeeID()+"', '"
+					+ employee.getStartDate()+"', '"
+					+ employee.getHourlyRate()+"', '"
+					+ employee.getLevel()+"', '"
+					+ employee.getFirstName()+"', '"
+					+ employee.getLastName()+"', '"
+					+ employee.getAddress()+"', '"
+					+ employee.getCity()+"', '"
+					+ employee.getState()+"', "
+					+ employee.getZipCode()+", '"
+					+ employee.getEmail()+"', '"
+					+ employee.getTelephone()+"', '"
+					+ employee.getRevenue()+"'"
 					+ ");";
 			System.out.println(queryStatement);
 			Jdbc.deleteStatement(queryStatement);
+			
 			return "success";
 		}
 		catch(Exception e) {
@@ -62,7 +67,29 @@ public class EmployeeDao {
 		 */
 		
 		/*Sample data begins*/
-		return "success";
+		System.out.println("*******Edit an Employee**********");
+		try {
+			String queryStatement="UPDATE Employee set "
+					+ "startDate = '"+ employee.getStartDate()+ "',"
+					+ "hourlyRate = '"+ employee.getHourlyRate()+ "', "
+					+ "level_ = '"+ employee.getLevel()+ "', "
+					+ "firstName = '"+ employee.getFirstName()+ "',"
+					+ "lastName = '"+ employee.getLastName()+ "', "
+					+ "address = '"+ employee.getAddress()+ "', "
+					+ "city = '"+ employee.getCity()+ "', "
+					+ "state = '"+ employee.getState()+ "', "
+					+ "zipCode = "+ employee.getZipCode()+ ", "
+					+ "email= '"+ employee.getEmail()+ "', "
+					+ "telephone = '"+ employee.getTelephone()+ "', "
+					+ "revenue = "+ employee.getRevenue() + " where employeeID= '"+employee.getEmployeeID()+"'";
+			System.out.println(queryStatement);
+			Jdbc.deleteStatement(queryStatement);
+			return "success";
+		}
+		catch(Exception e) {
+			System.out.println(e);
+			return "failure";
+		}
 		/*Sample data ends*/
 
 	}
@@ -75,7 +102,16 @@ public class EmployeeDao {
 		 */
 		
 		/*Sample data begins*/
-		return "success";
+		System.out.println("*******Deleting an employee**********");
+		try {
+			String queryStatement="DELETE FROM employee WHERE employeeID='"+employeeID+"'";
+			Jdbc.deleteStatement(queryStatement);
+			return "success";
+		}
+		catch(Exception e) {
+			System.out.println(e);
+			return "failure";
+		}
 		/*Sample data ends*/
 
 	}
@@ -92,20 +128,31 @@ public class EmployeeDao {
 		List<Employee> employees = new ArrayList<Employee>();
 		
 		/*Sample data begins*/
-		for (int i = 0; i < 10; i++) {
-			Employee employee = new Employee();
-			employee.setEmail("shiyong@cs.sunysb.edu");
-			employee.setFirstName("Shiyong");
-			employee.setLastName("Lu");
-			employee.setAddress("123 Success Street");
-			employee.setCity("Stony Brook");
-			employee.setStartDate("2006-10-17");
-			employee.setState("NY");
-			employee.setZipCode(11790);
-			employee.setTelephone("5166328959");
-			employee.setEmployeeID("631-413-5555");
-			employee.setHourlyRate(100);
-			employees.add(employee);
+		System.out.println("*******Get All Employees**********");
+		try {
+			String queryStatement ="select * from employee";
+			ResultSet rs = Jdbc.newStatement(queryStatement);
+			/*Sample data ends*/
+			while(rs.next()) {
+				Employee employee=new Employee();
+				employee.setEmployeeID(rs.getString("employeeID"));
+				employee.setStartDate(rs.getString("startDate"));
+				employee.setHourlyRate(rs.getFloat("hourlyRate"));
+				employee.setLevel(rs.getString("level_"));
+				employee.setFirstName(rs.getString("FirstName"));
+				employee.setLastName(rs.getString("LastName"));
+				employee.setAddress(rs.getString("Address"));
+				employee.setCity(rs.getString("City"));
+				employee.setState(rs.getString("State"));
+				employee.setZipCode(rs.getInt("ZipCode"));
+				employee.setEmail(rs.getString("Email"));
+				employee.setTelephone(rs.getString("Telephone"));
+				employee.setRevenue(rs.getString("revenue"));
+				employees.add(employee);
+			}
+		}
+		catch(Exception e) {
+			System.out.println(e);
 		}
 		/*Sample data ends*/
 		
@@ -123,17 +170,37 @@ public class EmployeeDao {
 		Employee employee = new Employee();
 		
 		/*Sample data begins*/
-		employee.setEmail("shiyong@cs.sunysb.edu");
-		employee.setFirstName("Shiyong");
-		employee.setLastName("Lu");
-		employee.setAddress("123 Success Street");
-		employee.setCity("Stony Brook");
-		employee.setStartDate("2006-10-17");
-		employee.setState("NY");
-		employee.setZipCode(11790);
-		employee.setTelephone("5166328959");
-		employee.setEmployeeID("631-413-5555");
-		employee.setHourlyRate(100);
+		System.out.println("*******Get Employee by ID**********");
+		try {
+//			Class.forName("com.mysql.cj.jdbc.Driver");
+////			Connection con=DriverManager.getConnection("jdbc:mysql://localhost:8081/cse305pa3","root","40302000");
+//			Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/cse305pa3?"+"user=root&password=40302000");
+//			System.out.println("*************Successful Connection **************");
+//			Statement st=con.createStatement();
+//			ResultSet ss =Jdbc.newStatement("select  from customer");
+			String queryStatement="select * from employee where employeeID='"+employeeID+"'";
+			System.out.println(queryStatement);
+			ResultSet rs = Jdbc.newStatement(queryStatement);
+			while(rs.next()) {
+//			while(ss.next()) {
+				employee.setEmployeeID(employeeID);
+				employee.setStartDate(rs.getString("startDate"));
+				employee.setHourlyRate(rs.getFloat("hourlyRate"));
+				employee.setLevel(rs.getString("level_"));
+				employee.setFirstName(rs.getString("FirstName"));
+				employee.setLastName(rs.getString("LastName"));
+				employee.setAddress(rs.getString("Address"));
+				employee.setCity(rs.getString("City"));
+				employee.setState(rs.getString("State"));
+				employee.setZipCode(rs.getInt("ZipCode"));
+				employee.setEmail(rs.getString("Email"));
+				employee.setTelephone(rs.getString("Telephone"));
+				employee.setRevenue(rs.getString("revenue"));
+			}
+		}
+		catch(Exception e) {
+			System.out.println(e);
+		}
 		/*Sample data ends*/
 		
 		return employee;
@@ -165,7 +232,18 @@ public class EmployeeDao {
 		 * The Employee ID is required to be returned as a String
 		 */
 
-		return "111-11-1111";
+		System.out.println("*******Get EmployeeID based on email addr**********");
+		String foundEmployeeID="";
+		try {
+			String queryStatement="select employeeID from employee where email='"+username+"'";
+			System.out.println(queryStatement);
+			ResultSet rs = Jdbc.newStatement(queryStatement);
+			foundEmployeeID= rs.getString("employeeID");
+		}
+		catch(Exception e ) {
+			System.out.println(e);
+		}
+		return foundEmployeeID;
 	}
 
 }
