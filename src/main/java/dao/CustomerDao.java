@@ -59,7 +59,8 @@ public class CustomerDao {
 //			System.out.println("*************Successful Connection **************");
 //			Statement st=con.createStatement();
 //			ResultSet rs =st.executeQuery("select * from customer");
-			String queryStatement="select * from customer where customerID LIKE '%"+searchKeyword+"%'";
+//			String queryStatement="select * from customer where customerID LIKE '%"+searchKeyword+"%'";
+			String queryStatement ="select * from customer";
 			ResultSet rs = Jdbc.newStatement(queryStatement);
 			/*Sample data ends*/
 			while(rs.next()) {
@@ -106,9 +107,9 @@ public class CustomerDao {
 //		customer.setEmail("shiyong@cs.sunysb.edu");
 		//New
 		System.out.println("*******Get Customer with highest revenue**********");
+		String queryStatement="select * from customer";
+		ResultSet rs = Jdbc.newStatement(queryStatement);
 		Customer customer = new Customer();
-		ResultSet rs = Jdbc.newStatement("select * from customer");
-		
 		/*Sample data ends*/
 	
 		return customer;
@@ -149,16 +150,17 @@ public class CustomerDao {
 //			System.out.println("*************Successful Connection **************");
 //			Statement st=con.createStatement();
 //			ResultSet ss =Jdbc.newStatement("select  from customer");
-			ResultSet rs = Jdbc.newStatement("select "
-											+ "customer.customerID,"
-											+ "customer.firstName,"
-											+ "customer.lastName,"
-											+ "customer.Address,"
-											+ "customer.City,"
-											+ "customer.State,"
-											+ "customer.zipCode,"
-											+ "customer.Email"
-											+ " from customer");
+			String queryStatement="select "
+					+ " customerID,"
+					+ " firstName,"
+					+ " lastName,"
+					+ " Address,"
+					+ " City,"
+					+ " State,"
+					+ " zipCode,"
+					+ " Email"
+					+ " from customer";
+			ResultSet rs = Jdbc.newStatement(queryStatement);
 			/*Sample data ends*/
 			while(rs.next()) {
 //			while(ss.next()) {
@@ -216,7 +218,9 @@ public class CustomerDao {
 //			System.out.println("*************Successful Connection **************");
 //			Statement st=con.createStatement();
 //			ResultSet ss =Jdbc.newStatement("select  from customer");
-			ResultSet rs = Jdbc.newStatement("select * from customer where customerID='customerID'");
+			String queryStatement="select * from customer where customerID='customerID'";
+			System.out.println(queryStatement);
+			ResultSet rs = Jdbc.newStatement(queryStatement);
 			while(rs.next()) {
 //			while(ss.next()) {
 				customer=new Customer();
@@ -249,9 +253,16 @@ public class CustomerDao {
 		 */
 
 		/*Sample data begins*/
-		return "success";
+		try {
+			String queryStatement="DELETE FROM customer WHERE customerID='"+customerID+"'";
+			Jdbc.deleteStatement(queryStatement);
+			return "success";
+		}
+		catch(Exception e) {
+			System.out.println(e);
+			return "failure";
+		}
 		/*Sample data ends*/
-		
 	}
 
 
@@ -262,8 +273,20 @@ public class CustomerDao {
 		 * username, which is the email address of the customer, who's ID has to be returned, is given as method parameter
 		 * The Customer's ID is required to be returned as a String
 		 */
-
-		return "111-11-1111";
+		//OLD
+//		return "111-11-1111";
+		//NEW
+		String foundCustomerID="";
+		try {
+			String queryStatement="select customerID from customer where email='"+username+"'";
+			System.out.println(queryStatement);
+			ResultSet rs = Jdbc.newStatement(queryStatement);
+			foundCustomerID= rs.getString("CustomerID");
+		}
+		catch(Exception e ) {
+			System.out.println(e);
+		}
+		return foundCustomerID;
 	}
 
 
