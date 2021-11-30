@@ -31,7 +31,7 @@ public class LoginDao {
 			login.setUsername(username);
 			login.setPassword(password);
 			//*******Hardcoded roles for now****** 
-			login.setRole(roles[1]);;			
+			login.setRole(roles[2]);			
 		}
 		catch(Exception e) {
 			System.out.println(e);
