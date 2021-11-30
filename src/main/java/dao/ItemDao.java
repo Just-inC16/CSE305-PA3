@@ -1,8 +1,10 @@
 package dao;
 
+import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
+import jdbc.Jdbc;
 import model.Auction;
 import model.Bid;
 import model.Employee;
@@ -22,14 +24,32 @@ public class ItemDao {
 		List<Item> items = new ArrayList<Item>();
 				
 		/*Sample data begins*/
-		for (int i = 0; i < 10; i++) {
-			Item item = new Item();
-			item.setItemID(123);
-			item.setDescription("sample description");
-			item.setType("BOOK");
-			item.setName("Sample Book");
-			item.setNumCopies(2);
-			items.add(item);
+		System.out.println("*******Get all Items**********");
+		try {
+//			Class.forName("com.mysql.cj.jdbc.Driver");
+////			Connection con=DriverManager.getConnection("jdbc:mysql://localhost:8081/cse305pa3","root","40302000");
+//			Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/cse305pa3?"+"user=root&password=40302000");
+//			System.out.println("*************Successful Connection **************");
+//			Statement st=con.createStatement();
+//			ResultSet rs =st.executeQuery("select * from customer");
+//			String queryStatement="select * from customer where customerID LIKE '%"+searchKeyword+"%'";
+			String queryStatement ="select * from item";
+			ResultSet rs = Jdbc.newStatement(queryStatement);
+			/*Sample data ends*/
+			while(rs.next()) {
+				Item item=new Item();
+				item.setItemID(rs.getInt("itemID"));
+				item.setDescription(rs.getString("description_"));
+				item.setType(rs.getString("type_"));
+				item.setName(rs.getString("name_"));
+				item.setNumCopies(rs.getInt("numCopies"));
+				item.setYearManufactured(rs.getInt("yearManufactured"));
+				item.setSoldPrice(rs.getInt(rs.getInt("soldPrice")));
+				items.add(item);
+			}
+		}
+		catch(Exception e) {
+			System.out.println(e);
 		}
 		/*Sample data ends*/
 		

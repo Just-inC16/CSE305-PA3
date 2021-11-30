@@ -18,7 +18,7 @@ VALUES (‘Titanic’, ‘phil’, ‘DVD’,2005,4,5,1,10, ‘Now’, ‘1:00PM
 (‘Nissan Sentra’, ‘john’, ‘Car’,2007, 1, 1000,10,2000, ‘Now’, ‘1:00PM,12/6/08’);
 
 
-INSERT INTO Items(Bidder/MaximumBid,CurrentBid,BidIncrement, MaximumBid, CurrentWinner)
+INSERT INTO BiddingHistory(Bidder/MaximumBid,CurrentBid,BidIncrement, MaximumBid, CurrentWinner)
 VALUES( ‘haixia/$10’,5,1,10, ‘haixia’),
 ( ‘shiyong/$10’,9,1,10, ‘haixia’),
 ( ‘shiyong/$10’,10,1,10, ‘haixia’),

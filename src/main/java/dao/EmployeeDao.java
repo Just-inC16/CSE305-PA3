@@ -22,7 +22,32 @@ public class EmployeeDao {
 		 */
 		
 		/*Sample data begins*/
-		return "success";
+		System.out.println("*******Add a customer **********");
+		try {
+			String queryStatement="INSERT INTO Customer"
+					+ "(customerID, firstName, lastName, Address, City, State, zipCode, telephone, email, creditCard, rating)"
+					+ " VALUES "
+					+ "('"
+					+ customer.getCustomerID()+"', '"
+					+ customer.getFirstName()+"', '"
+					+ customer.getLastName()+"', '"
+					+ customer.getAddress()+"', '"
+					+ customer.getCity()+"', '"
+					+ customer.getState()+"', "
+					+ customer.getZipCode()+", '"
+					+ customer.getTelephone()+"', '"
+					+ customer.getEmail()+"', '"
+					+ customer.getCreditCard()+"', "
+					+ customer.getRating()
+					+ ");";
+			System.out.println(queryStatement);
+			Jdbc.deleteStatement(queryStatement);
+			return "success";
+		}
+		catch(Exception e) {
+			System.out.println(e);
+			return "failure";
+		}
 		/*Sample data ends*/
 
 	}

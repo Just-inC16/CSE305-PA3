@@ -14,6 +14,7 @@ public class Item {
 	private int numCopies;
 	private int yearManufactured;
 	private int soldPrice;
+	
 	public int getSoldPrice() {
 		return soldPrice;
 	}
