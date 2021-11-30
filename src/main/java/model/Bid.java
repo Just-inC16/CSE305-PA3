@@ -12,6 +12,7 @@ public class Bid {
 	private String bidTime;
 	private float bidPrice;
 	private float maxBid;
+	
 	public float getMaxBid() {
 		return maxBid;
 	}
