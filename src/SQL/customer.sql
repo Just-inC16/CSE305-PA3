@@ -24,5 +24,4 @@ VALUES
 ("john","Smith","John","789 Peace Blvd.","Los Angeles","CA",12345,"(412)443-321","shlu@ic.sunysb.edu","2345-6789-2345-6789",1 ), 
 ("phil", "Phil", "Lewis", "135 Knowledge Lane", "Stony Brook", "NY", 11704, "(516)666-8888", "pml@cs.sunysb.edu", "6789-2345-6789-2345", 1);
 
-
 select * from customer;

@@ -7,17 +7,24 @@ import java.sql.Statement;
 
 public class Jdbc {
 	public static Statement base() {
-		
-	}
-	public static ResultSet newStatement(String queryStatement) {
 		Connection con =null;		
 		Statement st=null;
-		ResultSet rs = null;
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			con=DriverManager.getConnection("jdbc:mysql://localhost:3306/cse305pa3?user=root&password=40302000");
 			st=con.createStatement();
-			rs =st.executeQuery(queryStatement);
+		}
+		catch(Exception e) {
+			System.out.println(e);
+		}
+		return st;
+	}
+	public static ResultSet newStatement(String queryStatement) {
+		Statement baseStatement=null;
+		ResultSet rs = null;
+		try {
+			baseStatement= base();
+			rs =baseStatement.executeQuery(queryStatement);
 			
 		}
 		catch(Exception e) {
@@ -30,15 +37,12 @@ public class Jdbc {
 //		}
 		return rs;
 	}
-	public static void deleteStatement(String queryStatement) {
-		Connection con =null;		
-		Statement st=null;
+	public static void deleteStatement(String queryStatement) {	
+		Statement baseStatement=null;
 //		ResultSet rs = null;
 		try {
-			Class.forName("com.mysql.cj.jdbc.Driver");
-			con=DriverManager.getConnection("jdbc:mysql://localhost:3306/cse305pa3?user=root&password=40302000");
-			st=con.createStatement();
-			st.executeUpdate(queryStatement);	
+			baseStatement= base();
+			baseStatement.executeUpdate(queryStatement);	
 		}
 		catch(Exception e) {
 			System.out.println(e);
@@ -51,4 +55,15 @@ public class Jdbc {
 //		return rs;
 		
 	}
+//	public static void insertStatement(String queryStatement) {
+//		Statement baseStatement=null;
+////		ResultSet rs = null;
+//		try {
+//			baseStatement= base();
+//			baseStatement.createStatement(queryStatement);	
+//		}
+//		catch(Exception e) {
+//			System.out.println(e);
+//		}
+//	}
 }
