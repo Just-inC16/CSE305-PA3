@@ -172,17 +172,10 @@ public class EmployeeDao {
 		/*Sample data begins*/
 		System.out.println("*******Get Employee by ID**********");
 		try {
-//			Class.forName("com.mysql.cj.jdbc.Driver");
-////			Connection con=DriverManager.getConnection("jdbc:mysql://localhost:8081/cse305pa3","root","40302000");
-//			Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/cse305pa3?"+"user=root&password=40302000");
-//			System.out.println("*************Successful Connection **************");
-//			Statement st=con.createStatement();
-//			ResultSet ss =Jdbc.newStatement("select  from customer");
 			String queryStatement="select * from employee where employeeID='"+employeeID+"'";
 			System.out.println(queryStatement);
 			ResultSet rs = Jdbc.newStatement(queryStatement);
 			while(rs.next()) {
-//			while(ss.next()) {
 				employee.setEmployeeID(employeeID);
 				employee.setStartDate(rs.getString("startDate"));
 				employee.setHourlyRate(rs.getFloat("hourlyRate"));

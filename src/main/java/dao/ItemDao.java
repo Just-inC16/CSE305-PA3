@@ -26,13 +26,6 @@ public class ItemDao {
 		/*Sample data begins*/
 		System.out.println("*******Get all Items**********");
 		try {
-//			Class.forName("com.mysql.cj.jdbc.Driver");
-////			Connection con=DriverManager.getConnection("jdbc:mysql://localhost:8081/cse305pa3","root","40302000");
-//			Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/cse305pa3?"+"user=root&password=40302000");
-//			System.out.println("*************Successful Connection **************");
-//			Statement st=con.createStatement();
-//			ResultSet rs =st.executeQuery("select * from customer");
-//			String queryStatement="select * from customer where customerID LIKE '%"+searchKeyword+"%'";
 			String queryStatement ="select * from item";
 			ResultSet rs = Jdbc.newStatement(queryStatement);
 			/*Sample data ends*/
