@@ -7,11 +7,16 @@ import java.sql.Statement;
 
 public class Jdbc {
 	public static Statement base() {
-		Connection con =null;		
-		Statement st=null;
+		String DB_URL = "jdbc:mysql://localhost:3306/cse305pa3";
+		String USER = "root";
+		String PASS = "365365365jJkK;"; // password here
+		   
+		Statement st = null;
+		Connection con = null;
+		
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
-			con=DriverManager.getConnection("jdbc:mysql://localhost:3306/cse305pa3?user=root&password=40302000");
+			con = DriverManager.getConnection(DB_URL, USER, PASS);
 			st=con.createStatement();
 		}
 		catch(Exception e) {
@@ -22,6 +27,7 @@ public class Jdbc {
 	public static ResultSet newStatement(String queryStatement) {
 		Statement baseStatement=null;
 		ResultSet rs = null;
+		
 		try {
 			baseStatement= base();
 			rs =baseStatement.executeQuery(queryStatement);
@@ -37,6 +43,7 @@ public class Jdbc {
 //		}
 		return rs;
 	}
+	
 	public static void deleteStatement(String queryStatement) {	
 		Statement baseStatement=null;
 //		ResultSet rs = null;

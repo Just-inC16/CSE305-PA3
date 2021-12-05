@@ -1,6 +1,6 @@
 package dao;
 
-import java.sql.ResultSet;
+import java.sql.*;
 
 import jdbc.Jdbc;
 import model.Customer;
@@ -11,7 +11,7 @@ public class LoginDao {
 	 * This class handles all the database operations related to login functionality
 	 */
 	
-	private String [] roles= {"manager","customerRepresentative","customer"};
+	private String [] roles= new String[] {"manager","customerRepresentative","customer"};
 	public Login login(String username, String password) {
 		/*
 		 * Return a Login object with role as "manager", "customerRepresentative" or "customer" if successful login
@@ -22,24 +22,30 @@ public class LoginDao {
 		 * Query to verify the username and password and fetch the role of the user, must be implemented
 		 */
 		
-		/*Sample data begins*/
-		//New
-		Login login=null;
 		System.out.println("*******Get Login username & manager**********");
+		
+		Login login = null;
 		try {
-			login=new Login();
-			login.setUsername(username);
-			login.setPassword(password);
-			//*******Hardcoded roles for now****** 
-			login.setRole(roles[2]);			
+			// query login
+			Statement st = Jdbc.base();
+			ResultSet rs = st.executeQuery("select *\r\n"
+					+ "from Login\r\n"
+					+ "where Login.username = \"" + username + "\" \r\n"
+					+ "AND Login.password_ = \"" + password + "\";");
+			
+			// if query is successful, attempt to return Login object
+			while(rs.next()) {
+				login = new Login();
+				login.setUsername(rs.getString("username"));
+				login.setPassword(rs.getString("password_"));
+				login.setRole(rs.getString("role_"));		
+			}
 		}
 		catch(Exception e) {
 			System.out.println(e);
 		}
 		
-		return login;
-		/*Sample data ends*/
-		
+		return login;	
 	}
 	
 	public String addUser(Login login) {

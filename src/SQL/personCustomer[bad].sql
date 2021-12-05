@@ -1,5 +1,5 @@
 create database cse305pa3;
-use customercse305pa3;
+use cse305pa3;
 
 CREATE TABLE Person ( 	
 	SSN INT NOT NULL,			

@@ -1,5 +1,5 @@
 -- create database cse305pa3;
--- use customercse305pa3;
+-- use cse305pa3;
 drop table Auction;
 
 CREATE TABLE Auction (		 
