@@ -1,12 +1,15 @@
 package dao;
 
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
 import jdbc.Jdbc;
 import model.Customer;
 import model.Employee;
+import model.Item;
 
 public class EmployeeDao {
 	/*
@@ -24,6 +27,7 @@ public class EmployeeDao {
 		 */
 		
 		/*Sample data begins*/
+		System.out.println("*************** addEmployee() ***************");
 		System.out.println("*******Add an Employee **********");
 		try {
 			String queryStatement="INSERT INTO Employee"
@@ -67,6 +71,7 @@ public class EmployeeDao {
 		 */
 		
 		/*Sample data begins*/
+		System.out.println("*************** editEmployee() ***************");
 		System.out.println("*******Edit an Employee**********");
 		try {
 			String queryStatement="UPDATE Employee set "
@@ -102,6 +107,7 @@ public class EmployeeDao {
 		 */
 		
 		/*Sample data begins*/
+		System.out.println("*************** deleteEmployee() ***************");
 		System.out.println("*******Deleting an employee**********");
 		try {
 			String queryStatement="DELETE FROM employee WHERE employeeID='"+employeeID+"'";
@@ -125,6 +131,7 @@ public class EmployeeDao {
 		 * Each record is required to be encapsulated as a "Employee" class object and added to the "employees" List
 		 */
 
+		System.out.println("*************** getEmployees() ***************");
 		List<Employee> employees = new ArrayList<Employee>();
 		
 		/*Sample data begins*/
@@ -167,6 +174,7 @@ public class EmployeeDao {
 		 * The record is required to be encapsulated as a "Employee" class object
 		 */
 
+		System.out.println("*************** getEmployee() ***************");
 		Employee employee = new Employee();
 		
 		/*Sample data begins*/
@@ -206,6 +214,7 @@ public class EmployeeDao {
 		 * The record is required to be encapsulated as a "Employee" class object
 		 */
 		
+		System.out.println("*************** getHighestRevenueEmployee() ***************");
 		Employee employee = new Employee();
 		
 		/*Sample data begins*/
@@ -225,6 +234,7 @@ public class EmployeeDao {
 		 * The Employee ID is required to be returned as a String
 		 */
 
+		System.out.println("*************** getEmployeeID() ***************");
 		System.out.println("*******Get EmployeeID based on email addr**********");
 		String foundEmployeeID="";
 		try {

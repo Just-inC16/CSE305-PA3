@@ -18,12 +18,14 @@ public class Jdbc {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			con = DriverManager.getConnection(DB_URL, USER, PASS);
 			st=con.createStatement();
+			System.out.println("*************** Successful Connection ***************");
 		}
 		catch(Exception e) {
 			System.out.println(e);
 		}
 		return st;
 	}
+	
 	public static ResultSet newStatement(String queryStatement) {
 		Statement baseStatement=null;
 		ResultSet rs = null;

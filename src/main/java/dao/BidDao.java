@@ -10,6 +10,7 @@ public class BidDao {
 
 	public List<Bid> getBidHistory(String auctionID) {
 		
+		System.out.println("*************** getBidHistory() ***************");
 		List<Bid> bids = new ArrayList<Bid>();
 
 		/*
@@ -35,6 +36,7 @@ public class BidDao {
 
 	public List<Bid> getAuctionHistory(String customerID) {
 		
+		System.out.println("*************** getAuctionHistory() ***************");
 		List<Bid> bids = new ArrayList<Bid>();
 
 		/*
@@ -60,6 +62,7 @@ public class BidDao {
 
 	public Bid submitBid(String auctionID, String itemID, Float currentBid, Float maxBid, String customerID) {
 		
+		System.out.println("*************** submitBid() ***************");
 		Bid bid = new Bid();
 
 		/*
@@ -85,6 +88,7 @@ public class BidDao {
 
 	public List<Bid> getSalesListing(String searchKeyword) {
 		
+		System.out.println("*************** getSalesListing() ***************");
 		List<Bid> bids = new ArrayList<Bid>();
 
 		/*

@@ -12,6 +12,7 @@ public class AuctionDao {
 	
 	public List<Auction> getAllAuctions() {
 		
+		System.out.println("*************** getAllAuctions() ***************");
 		List<Auction> auctions = new ArrayList<Auction>();
 		
 		/*
@@ -42,6 +43,7 @@ public class AuctionDao {
 
 	public List<Auction> getAuctions(String customerID) {
 		
+		System.out.println("*************** getAuctions() ***************");
 		List<Auction> auctions = new ArrayList<Auction>();
 		
 		/*
@@ -72,6 +74,7 @@ public class AuctionDao {
 	}
 
 	public List<Auction> getOpenAuctions(String employeeEmail) {
+		System.out.println("*************** getOpenAuctions() ***************");
 		List<Auction> auctions = new ArrayList<Auction>();
 		
 		/*
@@ -110,6 +113,8 @@ public class AuctionDao {
 		 * auctionID is the Auction's ID, given as method parameter
 		 * The method should return a "success" string if the update is successful, else return "failure"
 		 */
+		
+		System.out.println("*************** recordSale() ***************");
 		/* Sample data begins */
 		return "success";
 		/* Sample data ends */
@@ -117,6 +122,7 @@ public class AuctionDao {
 
 	public List getAuctionData(String auctionID, String itemID) {
 		
+		System.out.println("*************** getAuctionData() ***************");
 		List output = new ArrayList();
 		Item item = new Item();
 		Bid bid = new Bid();

@@ -25,7 +25,7 @@ public class CustomerDao {
 		/*
 		 * This method fetches one or more customers based on the searchKeyword and returns it as an ArrayList
 		 */
-		
+		System.out.println("*************** getCustomers() ***************");
 		List<Customer> customers = new ArrayList<Customer>();
 
 		/*
@@ -51,7 +51,7 @@ public class CustomerDao {
 //			customers.add(customer);			
 //		}
 		//New
-		System.out.println("*******Get All Customers based on keywords**********");
+		System.out.println("*************** Get All Customers based on keywords ***************");
 		try {
 //			Class.forName("com.mysql.cj.jdbc.Driver");
 ////			Connection con=DriverManager.getConnection("jdbc:mysql://localhost:8081/cse305pa3","root","40302000");
@@ -97,7 +97,7 @@ public class CustomerDao {
 		 * The customer record is required to be encapsulated as a "Customer" class object
 		 */
 
-
+		System.out.println("*************** getHighestRevenueCustomer() ***************");
 		/*Sample data begins*/
 		//Old
 //		Customer customer = new Customer();
@@ -124,7 +124,8 @@ public class CustomerDao {
 		 * Each customer record is required to be encapsulated as a "Customer" class object and added to the "customers" List
 		 */
 
-		
+		System.out.println("*************** getCustomerMailingList() ***************");
+		System.out.println("*******Get Customer by ID**********");
 		List<Customer> customers = new ArrayList<Customer>();
 		
 		/*Sample data begins*/
@@ -184,6 +185,7 @@ public class CustomerDao {
 		
 		return customers;
 	}
+	
 	//Note: This is the business logic for that customer
 	public Customer getCustomer(String customerID) {
 
@@ -193,6 +195,8 @@ public class CustomerDao {
 		 * The students code to fetch data from the database will be written here
 		 * The customer record is required to be encapsulated as a "Customer" class object
 		 */
+		
+		System.out.println("*************** getCustomer() ***************");
 		
 		/*Sample data begins*/
 		//Old
@@ -208,9 +212,11 @@ public class CustomerDao {
 //		customer.setTelephone("5166328959");
 //		customer.setCreditCard("1234567812345678");
 //		customer.setRating(1);
+		
+		
 		//New
-		Customer customer=null;
 		System.out.println("*******Get Customer by ID**********");
+		Customer customer=null;
 		try {
 //			Class.forName("com.mysql.cj.jdbc.Driver");
 ////			Connection con=DriverManager.getConnection("jdbc:mysql://localhost:8081/cse305pa3","root","40302000");
@@ -253,6 +259,7 @@ public class CustomerDao {
 		 */
 
 		/*Sample data begins*/
+		System.out.println("*************** deleteCustomer() ***************");
 		System.out.println("*******Deleting a customer**********");
 		try {
 			String queryStatement="DELETE FROM customer WHERE customerID='"+customerID+"'";
@@ -274,6 +281,7 @@ public class CustomerDao {
 		 * username, which is the email address of the customer, who's ID has to be returned, is given as method parameter
 		 * The Customer's ID is required to be returned as a String
 		 */
+		System.out.println("*************** getCustomerID() ***************");
 		//OLD
 //		return "111-11-1111";
 		//NEW
@@ -300,6 +308,7 @@ public class CustomerDao {
 		 * The seller (which is a customer) record is required to be encapsulated as a "Customer" class object and added to the "customers" List
 		 */
 
+		System.out.println("*************** getSellers() ***************");
 		List<Customer> customers = new ArrayList<Customer>();
 		
 		/*Sample data begins*/
@@ -333,6 +342,7 @@ public class CustomerDao {
 		 */
 		
 		/*Sample data begins*/
+		System.out.println("*************** addCustomer() ***************");
 		System.out.println("*******Add a customer **********");
 		try {
 			String queryStatement="INSERT INTO Customer"
@@ -373,6 +383,7 @@ public class CustomerDao {
 		 */
 		
 		/*Sample data begins*/
+		System.out.println("*************** editCustomer() ***************");
 		System.out.println("*******Edit a customer **********");
 		try {
 //			String fetchCustomerID= customer.getCustomerID();

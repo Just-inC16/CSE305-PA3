@@ -21,6 +21,7 @@ public class PostDao {
 		 * The month and year can be accessed by getter method, i.e., post.getExpireDate()
 		 */
 
+		System.out.println("*************** getSalesReport() ***************");
 		List<Item> items = new ArrayList<Item>();
 				
 		/*Sample data begins*/

@@ -22,11 +22,12 @@ public class LoginDao {
 		 * Query to verify the username and password and fetch the role of the user, must be implemented
 		 */
 		
-		System.out.println("*******Get Login username & manager**********");
+		/*Sample data begins*/
+		System.out.println("*************** Get Login username & manager ***************");
 		
 		Login login = null;
 		try {
-			// query login
+			// query login validation
 			Statement st = Jdbc.base();
 			ResultSet rs = st.executeQuery("select *\r\n"
 					+ "from Login\r\n"
@@ -44,6 +45,7 @@ public class LoginDao {
 		catch(Exception e) {
 			System.out.println(e);
 		}
+		/*Sample data ends*/
 		
 		return login;	
 	}
