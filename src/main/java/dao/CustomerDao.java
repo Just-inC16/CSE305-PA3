@@ -151,7 +151,6 @@ public class CustomerDao {
 		System.out.println("*******Get Customer by ID**********");
 		List<Customer> customers = new ArrayList<Customer>();
 
-
 		/*Sample data begins*/
 		// ADDED 11]
 		System.out.println("*******Get all customers' mailing information**********");
