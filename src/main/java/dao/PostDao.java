@@ -9,7 +9,7 @@ import model.Post;
 
 public class PostDao {
 
-	
+	// M
 	public List<Item> getSalesReport(Post post) {
 		
 		/*

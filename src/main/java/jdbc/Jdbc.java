@@ -12,7 +12,7 @@ public class Jdbc {
 		String PASS = "365365365jJkK;"; // password here
 		   
 		Statement st = null;
-		Connection con = null;
+		Connection con;
 		
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
@@ -27,7 +27,7 @@ public class Jdbc {
 	}
 	
 	public static ResultSet newStatement(String queryStatement) {
-		Statement baseStatement=null;
+		Statement baseStatement;
 		ResultSet rs = null;
 		
 		try {

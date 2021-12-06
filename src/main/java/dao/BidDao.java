@@ -1,13 +1,17 @@
 package dao;
 
+import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
+import jdbc.Jdbc;
 import model.Bid;
 import model.Customer;
+import model.Item;
 
 public class BidDao {
 
+	// C ADDED 13] View Bid History -> See Auction
 	public List<Bid> getBidHistory(String auctionID) {
 		
 		System.out.println("*************** getBidHistory() ***************");
@@ -21,19 +25,36 @@ public class BidDao {
 		 */
 
 		/*Sample data begins*/
-		for (int i = 0; i < 10; i++) {
-			Bid bid = new Bid();
-			bid.setAuctionID(123);
-			bid.setCustomerID("123-12-1234");
-			bid.setBidTime("2008-12-11");
-			bid.setBidPrice(100);
-			bids.add(bid);			
+		// ADDED 13]
+		try {
+			ResultSet rs = Jdbc.newStatement(
+	"SELECT \n" +
+				"\tBid.CustomerID,\n" +
+				"\tBid.BidTime,\n" +
+				"\tBid.BidPrice\n" +
+				"FROM Bid,Auction\n" +
+				"WHERE\n" +
+				"\tBid.AuctionID = Auction.AuctionID AND\n" +
+				"\tBid.AuctionID = " + Integer.parseInt(auctionID) + "\n" +
+				"ORDER BY BidTime;");
+
+			while(rs.next()) {
+				Bid bid = new Bid();
+				bid.setAuctionID(rs.getInt("AuctionID"));
+				bid.setCustomerID(rs.getString("CustomerId"));
+				bid.setBidTime(rs.getString("BidTime"));
+				bid.setBidPrice(rs.getFloat("BidPrice"));
+				bids.add(bid);
+			}
+		} catch(Exception e) {
+			System.out.println(e);
 		}
 		/*Sample data ends*/
 		
 		return bids;
 	}
 
+	// C ADDED 14]
 	public List<Bid> getAuctionHistory(String customerID) {
 		
 		System.out.println("*************** getAuctionHistory() ***************");
@@ -53,13 +74,41 @@ public class BidDao {
 			bid.setCustomerID("123-12-1234");
 			bid.setBidTime("2008-12-11");
 			bid.setBidPrice(100);
+			System.out.println(
+					bid.getCustomerID() + " " +
+					bid.getAuctionID() + " " +
+					bid.getBidPrice() + " " +
+					bid.getBidTime());
 			bids.add(bid);			
+		}
+
+		// ADDED 14]
+		try {
+			ResultSet rs = Jdbc.newStatement(
+	"SELECT Bid.* FROM Bid, Auction WHERE Bid.AuctionID = Auction.AuctionID AND Bid.CustomerID = \""+ customerID +"\" ORDER BY Bid.BidTime DESC;");
+
+			while(rs.next()) {
+				Bid bid = new Bid();
+				bid.setAuctionID(rs.getInt("AuctionID"));
+				bid.setCustomerID(rs.getString("CustomerId"));
+				bid.setBidTime(rs.getString("BidTime"));
+				bid.setBidPrice(rs.getFloat("BidPrice"));
+				System.out.println(
+						bid.getCustomerID() + " " +
+						bid.getAuctionID() + " " +
+						bid.getBidPrice() + " " +
+						bid.getBidTime());
+				bids.add(bid);
+			}
+		} catch(Exception e) {
+			System.out.println(e);
 		}
 		/*Sample data ends*/
 		
 		return bids;
 	}
 
+	// C [long trace]
 	public Bid submitBid(String auctionID, String itemID, Float currentBid, Float maxBid, String customerID) {
 		
 		System.out.println("*************** submitBid() ***************");
@@ -86,6 +135,7 @@ public class BidDao {
 		return bid;
 	}
 
+	// M
 	public List<Bid> getSalesListing(String searchKeyword) {
 		
 		System.out.println("*************** getSalesListing() ***************");

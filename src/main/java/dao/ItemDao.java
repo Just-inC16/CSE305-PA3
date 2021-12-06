@@ -15,7 +15,7 @@ import model.Login;
 
 public class ItemDao {
 
-	
+	// M ADDED 3]
 	public List<Item> getItems() {
 		
 		/*
@@ -24,35 +24,34 @@ public class ItemDao {
 		 * Each record is required to be encapsulated as a "Item" class object and added to the "items" List
 		 */
 
+		System.out.println("*************** getItems() ***************");
+		System.out.println("*******Get all Items**********");
 		List<Item> items = new ArrayList<Item>();
 				
 		/*Sample data begins*/
-		System.out.println("*******Get all Items**********");
+		// ADDED 3]
 		try {
-			String queryStatement ="select * from item";
-			ResultSet rs = Jdbc.newStatement(queryStatement);
-			/*Sample data ends*/
+			ResultSet rs = Jdbc.newStatement("SELECT * FROM Item;");
+
 			while(rs.next()) {
 				Item item=new Item();
-				item.setItemID(rs.getInt("itemID"));
-				item.setDescription(rs.getString("description_"));
-				item.setType(rs.getString("type_"));
-				item.setName(rs.getString("name_"));
-				item.setNumCopies(rs.getInt("numCopies"));
-				item.setYearManufactured(rs.getInt("yearManufactured"));
-				item.setSoldPrice(rs.getInt(rs.getInt("soldPrice")));
+				item.setItemID(rs.getInt("ItemID"));
+				item.setName(rs.getString("Name"));
+				item.setType(rs.getString("Type"));
+				item.setYearManufactured(rs.getInt("Manufactured"));
+				item.setNumCopies(rs.getInt("NumCopies"));
+				item.setDescription(rs.getString("Description"));
 				items.add(item);
 			}
-		}
-		catch(Exception e) {
+		} catch(Exception e) {
 			System.out.println(e);
 		}
 		/*Sample data ends*/
-		
-		return items;
 
+		return items;
 	}
-	
+
+	// M
 	public List<Item> getBestsellerItems() {
 		
 		/*
@@ -75,13 +74,13 @@ public class ItemDao {
 			item.setNumCopies(2);
 			items.add(item);
 		}
-		
 		/*Sample data ends*/
 		
 		return items;
 
 	}
 
+	// M
 	public List<Item> getSummaryListing(String searchKeyword) {
 		
 		/*
@@ -107,9 +106,9 @@ public class ItemDao {
 		/*Sample data ends*/
 		
 		return items;
-
 	}
 
+	// CR
 	public List<Item> getItemSuggestions(String customerID) {
 		
 		/*
@@ -138,6 +137,7 @@ public class ItemDao {
 
 	}
 
+	// C Items sold by Seller -> View Item
 	public List getItemsBySeller(String sellerID) {
 		
 		/*
@@ -188,6 +188,7 @@ public class ItemDao {
 		return output;
 	}
 
+	// C ADDED
 	public List<Item> getItemTypes() {
 		
 		/*
@@ -201,16 +202,34 @@ public class ItemDao {
 		List<Item> items = new ArrayList<Item>();
 		
 		/*Sample data begins*/
-		for (int i = 0; i < 6; i++) {
+		/*for (int i = 0; i < 6; i++) {
 			Item item = new Item();
 			item.setType("BOOK");
 			items.add(item);
+		}*/
+
+		// ADDED
+		try {
+			String queryStatement = "SELECT Item.Type FROM Item GROUP BY Item.Type;";
+			System.out.println(queryStatement);
+			ResultSet rs = Jdbc.newStatement(queryStatement);
+
+			while(rs.next()) {
+				Item item = new Item();
+				item.setType(rs.getString("Type"));
+				items.add(item);
+				System.out.println("Type: " + item.getType());
+			}
+		}
+		catch(Exception e) {
+			System.out.println(e);
 		}
 		/*Sample data ends*/
 		
 		return items;
 	}
 
+	// C View Items in Auctions -> Search by Item Name
 	public List getItemsByName(String itemName) {
 		
 		/*
@@ -250,6 +269,7 @@ public class ItemDao {
 		return output;
 	}
 
+	// C View Items in Auctions -> Search by Item Type
 	public List getItemsByType(String itemType) {
 		
 		/*
@@ -289,6 +309,7 @@ public class ItemDao {
 		return output;
 	}
 
+	// C
 	public List<Item> getBestsellersForCustomer(String customerID) {
 
 		/*
