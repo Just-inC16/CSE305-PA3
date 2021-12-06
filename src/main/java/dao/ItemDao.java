@@ -223,7 +223,7 @@ public class ItemDao {
 		 * The items and auctions Lists are to be added to the "output" List and returned
 		 */
 
-		System.out.println("*************** getItemsByType() ***************");
+		System.out.println("*************** getItemsByName() ***************");
 		List output = new ArrayList();
 		List<Item> items = new ArrayList<Item>();
 		List<Auction> auctions = new ArrayList<Auction>();
@@ -262,7 +262,7 @@ public class ItemDao {
 		 * The items and auctions Lists are to be added to the "output" List and returned
 		 */
 
-		System.out.println("*************** getItemsByName() ***************");
+		System.out.println("*************** getItemsByType() ***************");
 		List output = new ArrayList();
 		List<Item> items = new ArrayList<Item>();
 		List<Auction> auctions = new ArrayList<Auction>();
