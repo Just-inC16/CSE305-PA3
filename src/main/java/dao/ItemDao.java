@@ -51,7 +51,7 @@ public class ItemDao {
 		return items;
 	}
 
-	// M
+	// M ADDED 18]
 	public List<Item> getBestsellerItems() {
 		
 		/*
@@ -65,6 +65,7 @@ public class ItemDao {
 		
 		
 		/*Sample data begins*/
+		/*
 		for (int i = 0; i < 5; i++) {
 			Item item = new Item();
 			item.setItemID(123);
@@ -73,6 +74,32 @@ public class ItemDao {
 			item.setName("Sample Book");
 			item.setNumCopies(2);
 			items.add(item);
+		}
+		*/
+
+
+		// ADDED 18]
+		try {
+			ResultSet rs = Jdbc.newStatement(
+				"SELECT Item.*, Auction.Copies_Sold\n" +
+				"FROM Auction, Item\n" +
+				"WHERE \n" +
+				"\tAuction.ItemID = Item.ItemID AND \n" +
+				"\tAuction.Copies_Sold > 0\n" +
+				"GROUP BY Auction.ItemID\n" +
+				"ORDER BY Auction.Copies_Sold DESC;");
+
+			while(rs.next()) {
+				Item item = new Item();
+				item.setItemID(rs.getInt("ItemID"));
+				item.setDescription(rs.getString("Description"));
+				item.setType(rs.getString("Type"));
+				item.setName(rs.getString("Name"));
+				item.setNumCopies(rs.getInt("NumCopies"));
+				items.add(item);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
 		/*Sample data ends*/
 		
@@ -337,5 +364,4 @@ public class ItemDao {
 		return items;
 
 	}
-
 }
