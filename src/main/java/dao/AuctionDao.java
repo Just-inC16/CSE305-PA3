@@ -13,7 +13,7 @@ import model.Item;
 
 public class AuctionDao {
 
-	// C
+	// C ADDED]
 	public List<Auction> getAllAuctions() {
 		
 		System.out.println("*************** getAllAuctions() ***************");
@@ -40,6 +40,7 @@ public class AuctionDao {
 			auctions.add(auction);
 		}*/
 
+		// ADDED
 		try {
 			ResultSet rs = Jdbc.newStatement(
 	"SELECT * \n" +
@@ -68,7 +69,7 @@ public class AuctionDao {
 
 	}
 
-	// NOT CALLED
+	// NOT CALLED [probably by C]
 	public List<Auction> getAuctions(String customerID) {
 		
 		System.out.println("*************** getAuctions() ***************");

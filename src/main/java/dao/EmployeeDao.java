@@ -16,7 +16,7 @@ public class EmployeeDao {
 	 * This class handles all the database operations related to the employee table
 	 */
 
-	// M ADDED]
+	// M TESTED
 	public List<Employee> getEmployees() {
 
 		/*
@@ -60,7 +60,7 @@ public class EmployeeDao {
 		return employees;
 	}
 
-	// NOT CALLED
+	// TESTED
 	public Employee getEmployee(String employeeID) {
 
 		/*
@@ -103,7 +103,7 @@ public class EmployeeDao {
 		return employee;
 	}
 
-	// M ADDED 6]
+	// M TESTED
 	public Employee getHighestRevenueEmployee() {
 		
 		/*
@@ -165,7 +165,7 @@ public class EmployeeDao {
 		return foundEmployeeID;
 	}
 
-	// NOT CALLED [prob by M]
+	// M ADDED
 	public String addEmployee(Employee employee) {
 
 		/*
@@ -211,7 +211,7 @@ public class EmployeeDao {
 
 	}
 
-	// NOT CALLED [prob by M]
+	// M TESTED
 	public String editEmployee(Employee employee) {
 		/*
 		 * All the values of the edit employee form are encapsulated in the employee object.
@@ -250,7 +250,7 @@ public class EmployeeDao {
 
 	}
 
-	// NOT CALLED [prob by M]
+	// M TESTED
 	public String deleteEmployee(String employeeID) {
 		/*
 		 * employeeID, which is the Employee's ID which has to be deleted, is given as method parameter

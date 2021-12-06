@@ -70,7 +70,7 @@ public class CustomerDao {
 		return customers;
 	}
 
-	// NOT CALLED
+	// TESTED
 	//Note: This is the business logic for that customer
 	public Customer getCustomer(String customerID) {
 
@@ -138,7 +138,8 @@ public class CustomerDao {
 		return customer;
 	}
 
-	// CR ADDED 11] (Not really. Simplified the query)
+	// ---------- ---------- ---------- ----------
+	// CR TESTED
 	public List<Customer> getCustomerMailingList() {
 
 		/*
@@ -152,7 +153,7 @@ public class CustomerDao {
 		List<Customer> customers = new ArrayList<Customer>();
 
 		/*Sample data begins*/
-		// ADDED 11]
+		// ADDED 11] (Not really. Simplified the query)
 		System.out.println("*******Get all customers' mailing information**********");
 		try {
 			ResultSet rs = Jdbc.newStatement("select * from customer;");
@@ -178,7 +179,7 @@ public class CustomerDao {
 		return customers;
 	}
 
-	// M ADDED 7]
+	// M TESTED
 	public Customer getHighestRevenueCustomer() {
 		/*
 		 * This method fetches the customer who generated the highest total revenue and returns it
@@ -199,24 +200,24 @@ public class CustomerDao {
 				"GROUP BY CustomerID\n" +
 				"ORDER BY TotalSpent DESC\n" +
 				"LIMIT 1;");
-		
+
 			while(rs.next()) {
-				customer.setCustomerID(rs.getString("CustomerID"));	
-				customer.setLastName(rs.getString("LastName"));	
-				customer.setEmail(rs.getString("Email"));			
-				customer.setFirstName(rs.getString("FirstName"));		
+				customer.setCustomerID(rs.getString("CustomerID"));
+				customer.setLastName(rs.getString("LastName"));
+				customer.setEmail(rs.getString("Email"));
+				customer.setFirstName(rs.getString("FirstName"));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		/*Sample data ends*/
-	
+
 		return customer;
 	}
 
 	// C
 	public List<Customer> getSellers() {
-		
+
 		/*
 		 * This method fetches the all seller details and returns it
 		 * The students code to fetch data from the database will be written here
@@ -225,7 +226,7 @@ public class CustomerDao {
 
 		System.out.println("*************** getSellers() ***************");
 		List<Customer> customers = new ArrayList<Customer>();
-		
+
 		/*Sample data begins*/
 		for (int i = 0; i < 10; i++) {
 			Customer customer = new Customer();
@@ -237,10 +238,10 @@ public class CustomerDao {
 			customer.setState("NY");
 			customer.setEmail("shiyong@cs.sunysb.edu");
 			customer.setZipCode(11790);
-			customers.add(customer);			
+			customers.add(customer);
 		}
 		/*Sample data ends*/
-		
+
 		return customers;
 
 	}
@@ -272,7 +273,7 @@ public class CustomerDao {
 		return foundCustomerID;
 	}
 
-	// NOT CALLED [prob by CR]
+	// CR ADDED
 	public String addCustomer(Customer customer) {
 
 		/*
@@ -288,7 +289,7 @@ public class CustomerDao {
 		System.out.println("*******Add a customer **********");
 		try {
 			String queryStatement="INSERT INTO Customer"
-					+ "(customerID, firstName, lastName, Address, City, State, zipCode, telephone, email, creditCard, rating)"
+					+ "(customerID, firstName, lastName, Address, City, State, zipCode, telephone, email, creditCardNum, rating)"
 					+ " VALUES "
 					+ "('"
 					+ customer.getCustomerID()+"', '"
@@ -315,7 +316,7 @@ public class CustomerDao {
 
 	}
 
-	// NOT CALLED [prob by CR]
+	// CR TESTED
 	public String editCustomer(Customer customer) {
 		/*
 		 * All the values of the edit customer form are encapsulated in the customer object.
@@ -345,7 +346,7 @@ public class CustomerDao {
 					+ "zipCode = "+ customer.getZipCode()+ ", "
 					+ "telephone= '"+ customer.getTelephone()+ "', "
 					+ "email = '"+ customer.getEmail()+ "', "
-					+ "creditCard = '"+ customer.getCreditCard()+ "', "
+					+ "creditCardNum = '"+ customer.getCreditCard()+ "', "
 					+ "rating = "+ customer.getRating() + " where customerID= '"+customer.getCustomerID()+"'";
 			System.out.println(queryStatement);
 			Jdbc.deleteStatement(queryStatement);
@@ -359,7 +360,7 @@ public class CustomerDao {
 
 	}
 
-	// NOT CALLED [prob by CR]
+	// CR TESTED
 	public String deleteCustomer(String customerID) {
 
 		/*

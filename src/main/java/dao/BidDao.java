@@ -73,7 +73,7 @@ public class BidDao {
 			bid.setAuctionID(123);
 			bid.setCustomerID("123-12-1234");
 			bid.setBidTime("2008-12-11");
-			bid.setBidPrice(100);
+			bid.setBidPrice(100 + 2 * i);
 			System.out.println(
 					bid.getCustomerID() + " " +
 					bid.getAuctionID() + " " +

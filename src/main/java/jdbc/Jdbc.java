@@ -1,16 +1,13 @@
 package jdbc;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.Statement;
+import java.sql.*;
 
 public class Jdbc {
+	static String DB_URL = "jdbc:mysql://localhost:3306/cse305pa3";
+	static String USER = "root";
+	static String PASS = "365365365jJkK;"; // password here
+
 	public static Statement base() {
-		String DB_URL = "jdbc:mysql://localhost:3306/cse305pa3";
-		String USER = "root";
-		String PASS = "365365365jJkK;"; // password here
-		   
 		Statement st = null;
 		Connection con;
 		
