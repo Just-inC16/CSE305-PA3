@@ -49,7 +49,7 @@ public class BidDao {
 		return bids;
 	}
 
-	// C
+	// C ADDED 14]
 	public List<Bid> getAuctionHistory(String customerID) {
 		
 		System.out.println("*************** getAuctionHistory() ***************");
@@ -63,20 +63,6 @@ public class BidDao {
 		 */
 
 		/*Sample data begins*/
-		for (int i = 0; i < 10; i++) {
-			Bid bid = new Bid();
-			bid.setAuctionID(123);
-			bid.setCustomerID("123-12-1234");
-			bid.setBidTime("2008-12-11");
-			bid.setBidPrice(100 + 2 * i);
-			System.out.println(
-					bid.getCustomerID() + " " +
-					bid.getAuctionID() + " " +
-					bid.getBidPrice() + " " +
-					bid.getBidTime());
-			bids.add(bid);			
-		}
-
 		// ADDED 14]
 		try {
 			ResultSet rs = Jdbc.newStatement(
@@ -88,11 +74,6 @@ public class BidDao {
 				bid.setCustomerID(rs.getString("CustomerId"));
 				bid.setBidTime(rs.getString("BidTime"));
 				bid.setBidPrice(rs.getFloat("BidPrice"));
-				System.out.println(
-						bid.getCustomerID() + " " +
-						bid.getAuctionID() + " " +
-						bid.getBidPrice() + " " +
-						bid.getBidTime());
 				bids.add(bid);
 			}
 		} catch(Exception e) {

@@ -60,7 +60,7 @@ public class EmployeeDao {
 		return employees;
 	}
 
-	// TESTED
+	// M TESTED
 	public Employee getEmployee(String employeeID) {
 
 		/*
@@ -142,7 +142,7 @@ public class EmployeeDao {
 	}
 
 	// ---------- ---------- ---------- ----------
-	// NEEDS FIX [by login]
+	// TESTED [by login]
 	public String getEmployeeID(String username) {
 		/*
 		 * The students code to fetch data from the database based on "username" will be written here
