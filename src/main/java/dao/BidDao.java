@@ -1,13 +1,11 @@
 package dao;
 
-import java.sql.ResultSet;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 import jdbc.Jdbc;
 import model.Bid;
-import model.Customer;
-import model.Item;
 
 public class BidDao {
 
@@ -28,10 +26,7 @@ public class BidDao {
 		// ADDED 13]
 		try {
 			ResultSet rs = Jdbc.newStatement(
-	"SELECT \n" +
-				"\tBid.CustomerID,\n" +
-				"\tBid.BidTime,\n" +
-				"\tBid.BidPrice\n" +
+	"SELECT Bid.*\n" +
 				"FROM Bid,Auction\n" +
 				"WHERE\n" +
 				"\tBid.AuctionID = Auction.AuctionID AND\n" +
@@ -68,20 +63,6 @@ public class BidDao {
 		 */
 
 		/*Sample data begins*/
-		for (int i = 0; i < 10; i++) {
-			Bid bid = new Bid();
-			bid.setAuctionID(123);
-			bid.setCustomerID("123-12-1234");
-			bid.setBidTime("2008-12-11");
-			bid.setBidPrice(100 + 2 * i);
-			System.out.println(
-					bid.getCustomerID() + " " +
-					bid.getAuctionID() + " " +
-					bid.getBidPrice() + " " +
-					bid.getBidTime());
-			bids.add(bid);			
-		}
-
 		// ADDED 14]
 		try {
 			ResultSet rs = Jdbc.newStatement(
@@ -93,11 +74,6 @@ public class BidDao {
 				bid.setCustomerID(rs.getString("CustomerId"));
 				bid.setBidTime(rs.getString("BidTime"));
 				bid.setBidPrice(rs.getFloat("BidPrice"));
-				System.out.println(
-						bid.getCustomerID() + " " +
-						bid.getAuctionID() + " " +
-						bid.getBidPrice() + " " +
-						bid.getBidTime());
 				bids.add(bid);
 			}
 		} catch(Exception e) {

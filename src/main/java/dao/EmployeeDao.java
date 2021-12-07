@@ -60,7 +60,7 @@ public class EmployeeDao {
 		return employees;
 	}
 
-	// TESTED
+	// M TESTED
 	public Employee getEmployee(String employeeID) {
 
 		/*
@@ -105,15 +105,15 @@ public class EmployeeDao {
 
 	// M TESTED
 	public Employee getHighestRevenueEmployee() {
-		
+
 		/*
 		 * The students code to fetch employee data who generated the highest revenue will be written here
 		 * The record is required to be encapsulated as a "Employee" class object
 		 */
-		
+
 		System.out.println("*************** getHighestRevenueEmployee() ***************");
 		Employee employee = new Employee();
-		
+
 		/*Sample data begins*/
 		// ADDED 6]
 		try {
@@ -126,23 +126,23 @@ public class EmployeeDao {
 				"GROUP BY Auction.Monitor\n" +
 				"ORDER BY TotalGenerated DESC\n" +
 				"LIMIT 1;");
-		
+
 			while(rs.next()) {
-				employee.setEmail(rs.getString("Email"));			
-				employee.setFirstName(rs.getString("FirstName"));	
-				employee.setLastName(rs.getString("LastName"));		
-				employee.setEmployeeID(rs.getString("EmployeeID"));	
+				employee.setEmail(rs.getString("Email"));
+				employee.setFirstName(rs.getString("FirstName"));
+				employee.setLastName(rs.getString("LastName"));
+				employee.setEmployeeID(rs.getString("EmployeeID"));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		/*Sample data ends*/
-		
+
 		return employee;
 	}
 
 	// ---------- ---------- ---------- ----------
-	// [by login]
+	// TESTED [by login]
 	public String getEmployeeID(String username) {
 		/*
 		 * The students code to fetch data from the database based on "username" will be written here
@@ -151,17 +151,20 @@ public class EmployeeDao {
 		 */
 
 		System.out.println("*************** getEmployeeID() ***************");
-		System.out.println("*******Get EmployeeID based on email addr**********");
-		String foundEmployeeID="";
+		// System.out.println("*******Get EmployeeID based on email addr**********");
+		String foundEmployeeID=null;
 		try {
-			String queryStatement="select employeeID from employee where email='"+username+"'";
-			System.out.println(queryStatement);
+			String queryStatement="select * from employee where email= \""+ username +"\";";
 			ResultSet rs = Jdbc.newStatement(queryStatement);
-			foundEmployeeID= rs.getString("employeeID");
+
+			while(rs.next()) {
+				foundEmployeeID = rs.getString("EmployeeID");
+			}
 		}
 		catch(Exception e ) {
 			System.out.println(e);
 		}
+		System.out.println("EmployeeID: " + foundEmployeeID);
 		return foundEmployeeID;
 	}
 

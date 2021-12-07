@@ -38,8 +38,8 @@ CREATE TABLE Customer (
     Telephone CHAR(13), 
 	Email CHAR(64),
     
-    Password_ CHAR(20),	-- added
-	Role_ CHAR(40),		-- added
+    -- Password_ CHAR(20),	-- added
+	-- Role_ CHAR(40),		-- added
     
     Rating DECIMAL,
     CreditCardNum LONG,
@@ -57,8 +57,8 @@ CREATE TABLE Employee (
     Telephone CHAR(13), 
 	Email CHAR(64),
     
-    Password_ CHAR(20),	-- added
-	Role_ CHAR(40),		-- added
+    -- Password_ CHAR(20),	-- added
+	-- Role_ CHAR(40),		-- added
     
     StartDate DATE,		 
 	HourlyRate DECIMAL(18, 2),	 

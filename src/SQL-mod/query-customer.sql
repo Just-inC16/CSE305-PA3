@@ -8,10 +8,18 @@ ORDER BY Auction.AuctionID DESC;
 
 -- used for getBidHistory()
 -- 13] A bid history for each auction
-SELECT 
+/*SELECT 
 	Bid.CustomerID,
 	Bid.BidTime,
 	Bid.BidPrice
+FROM Bid,Auction
+WHERE
+	Bid.AuctionID = Auction.AuctionID AND
+	Bid.AuctionID = 1 -- (?) provided
+ORDER BY BidTime;*/
+
+-- 13 MOD]
+SELECT Bid.*
 FROM Bid,Auction
 WHERE
 	Bid.AuctionID = Auction.AuctionID AND
