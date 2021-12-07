@@ -42,6 +42,7 @@ public class CustomerDao {
 			if (searchKeyword == null){
 				searchKeyword = "";
 			}
+			//Need more[applies to the other properties]
 			String queryStatement="select * from customer where customerID LIKE '%"+searchKeyword+"%'";
 			ResultSet rs = Jdbc.newStatement(queryStatement);
 

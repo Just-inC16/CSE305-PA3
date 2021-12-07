@@ -1,6 +1,6 @@
 -- CREATE DATABASE Ebay2;
 -- USE Ebay2;
-
+-- drop schema cse305pa3;
 create database cse305pa3;
 use cse305pa3;
 

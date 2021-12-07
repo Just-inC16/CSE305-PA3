@@ -9,6 +9,7 @@ import java.util.List;
 import jdbc.Jdbc;
 import model.Auction;
 import model.Bid;
+import model.Customer;
 import model.Employee;
 import model.Item;
 import model.Login;
@@ -119,16 +120,30 @@ public class ItemDao {
 
 		System.out.println("*************** getSummaryListing() ***************");
 		List<Item> items = new ArrayList<Item>();
-				
 		/*Sample data begins*/
-		for (int i = 0; i < 6; i++) {
-			Item item = new Item();
-			item.setItemID(123);
-			item.setDescription("sample description");
-			item.setType("BOOK");
-			item.setName("Sample Book");
-			item.setSoldPrice(150);
-			items.add(item);
+		try {
+			// ResultSet rs = Jdbc.newStatement("SELECT * FROM Customer;");
+			if (searchKeyword == null){
+				searchKeyword = "";
+			}
+			//Need more[applies to the other properties]
+			String queryStatement="SELECT Item.Name, Item.Type, Item.Description, SUM(BidWon.BidPrice) AS TotalGenerated FROM BidWon, Auction, Item "
+					+ " WHERE BidWon.AuctionID = Auction.AuctionID AND Auction.ItemID = Item.ItemID AND"
+					+ " name LIKE '%"+searchKeyword+"%' GROUP BY Item.Name";
+			System.out.println("********************Query :" + queryStatement);
+			ResultSet rs = Jdbc.newStatement(queryStatement);
+			while(rs.next()) {
+				Item item = new Item();
+				item.setSoldPrice(rs.getInt("TotalGenerated"));
+				item.setName(rs.getString("Name"));
+				item.setDescription(rs.getString("Description"));
+				item.setType(rs.getString("Type"));
+				items.add(item);
+			}
+			System.out.println(items.size() + ": " + queryStatement);
+		}
+		catch(Exception e) {
+			System.out.println(e);
 		}
 		/*Sample data ends*/
 		
