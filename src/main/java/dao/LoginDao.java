@@ -12,6 +12,7 @@ public class LoginDao {
 	 */
 	
 	private String [] roles= new String[] {"manager","customerRepresentative","customer"};
+	//***Is this the class where we put the role?****
 	public Login login(String username, String password) {
 		/*
 		 * Return a Login object with role as "manager", "customerRepresentative" or "customer" if successful login
