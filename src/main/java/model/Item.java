@@ -13,12 +13,12 @@ public class Item {
 	private String name;
 	private int numCopies;
 	private int yearManufactured;
-	private int soldPrice;
+	private float soldPrice;
 	
-	public int getSoldPrice() {
+	public float getSoldPrice() {
 		return soldPrice;
 	}
-	public void setSoldPrice(int soldPrice) {
+	public void setSoldPrice(float soldPrice) {
 		this.soldPrice = soldPrice;
 	}
 	public int getItemID() {

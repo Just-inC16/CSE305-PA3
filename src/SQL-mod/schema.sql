@@ -69,7 +69,7 @@ CREATE TABLE Employee (
 
 -- added table: Login
 CREATE TABLE Login (		 
-	username CHAR(64) NOT NULL UNIQUE, 
+	username CHAR(20) NOT NULL UNIQUE, 
 	password_ CHAR(20),
 	role_ CHAR(40),
     PRIMARY KEY (username, role_)

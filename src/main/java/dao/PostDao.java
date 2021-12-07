@@ -1,11 +1,12 @@
 package dao;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import model.Employee;
+import jdbc.Jdbc;
 import model.Item;
 import model.Post;
+
+import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 
 public class PostDao {
 
@@ -22,18 +23,47 @@ public class PostDao {
 		 */
 
 		System.out.println("*************** getSalesReport() ***************");
+		String expDate = post.getExpireDate();
+		int ind = expDate.indexOf('-');
+		String month = expDate.substring(0, ind);
+		String year = expDate.substring(ind + 1, ind + 5);
+		if (month.length() == 1){
+			month = "0" + month;
+		}
+
+		// System.out.println("Date: " + expDate);
+		// System.out.println("Year: " + year);
+		// System.out.println("Month: " + month);
+
 		List<Item> items = new ArrayList<Item>();
 				
 		/*Sample data begins*/
+		/*
 		for (int i = 0; i < 10; i++) {
 			Item item = new Item();
 			item.setName("Sample item");
 			item.setSoldPrice(100);
 			items.add(item);
+		}*/
+
+		try {
+			ResultSet rs = Jdbc.newStatement(
+	"SELECT BidWon.BidPrice, Item.Name \n" +
+				"FROM BidWon, Auction, Item WHERE \n" +
+				"BidWon.AuctionID = Auction.AuctionID AND\n" +
+				"Auction.ItemID = Item.ItemID AND\n" +
+				"BidTime LIKE '%" + year + "-" + month + "%';");
+
+			while(rs.next()) {
+				Item item=new Item();
+				item.setName(rs.getString("Name"));
+				item.setSoldPrice(rs.getFloat("BidPrice"));
+				items.add(item);
+			}
+		} catch(Exception e) {
+			System.out.println(e);
 		}
 		/*Sample data ends*/
-		
-
 		return items;
 		
 	}
