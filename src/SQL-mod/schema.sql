@@ -127,6 +127,7 @@ CREATE TABLE Bid (
 	CustomerId CHAR(12) NOT NULL,	-- foreign key, buyer_id -- changed from INT
 	BidTime DATETIME,			-- bought_date
     BidPrice DECIMAL(18, 2),	-- bought_price
+    -- Where is maxBid???
 	PRIMARY KEY (AuctionID, CustomerId, BidTime),
 	FOREIGN KEY(AuctionID) REFERENCES Auction(AuctionID)
 		ON DELETE CASCADE

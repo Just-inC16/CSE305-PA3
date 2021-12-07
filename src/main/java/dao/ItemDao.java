@@ -127,10 +127,18 @@ public class ItemDao {
 				searchKeyword = "";
 			}
 			//Need more[applies to the other properties]
-			String queryStatement="SELECT Item.Name, Item.Type, Item.Description, SUM(BidWon.BidPrice) AS TotalGenerated FROM BidWon, Auction, Item "
+			String queryStatement="SELECT Item.Name, Item.Type, Item.Description, SUM(BidWon.BidPrice) AS TotalGenerated FROM BidWon, Auction, Item"
 					+ " WHERE BidWon.AuctionID = Auction.AuctionID AND Auction.ItemID = Item.ItemID AND"
-					+ " name LIKE '%"+searchKeyword+"%' GROUP BY Item.Name";
-			System.out.println("********************Query :" + queryStatement);
+					+ " name LIKE '%"+searchKeyword+"%' GROUP BY Item.Name, Item.Type";
+//			String queryStatement2="SELECT Customer.Name, Item.Name, Item.Type, Item.Description, SUM(BidWon.BidPrice) AS TotalGenerated FROM BidWon, Auction, Item, Customer"
+//					+ " WHERE BidWon.AuctionID = Auction.AuctionID AND Auction.ItemID = Item.ItemID AND"
+//					+ " name LIKE '%"+searchKeyword+"%' GROUP BY Item.Name, Item.Type,Customer.Name";
+//			String queryStatement2="SELECT Item.Name, Item.Type, Item.Description, SUM(BidWon.BidPrice) AS TotalGenerated FROM BidWon, Auction, Item "
+//					+ " WHERE BidWon.AuctionID = Auction.AuctionID AND Auction.ItemID = Item.ItemID AND"
+//					+ " name LIKE '%"+searchKeyword+"%'";
+//			String test ="SELECT Item.Name, Item.Type, SUM(BidWon.BidPrice) AS TotalGenerated FROM BidWon, Auction, Item "
+//					+ " WHERE BidWon.AuctionID = Auction.AuctionID AND Auction.ItemID = Item.ItemID ORDER BY "
+//					+ " name LIKE '%"+searchKeyword+"%'";
 			ResultSet rs = Jdbc.newStatement(queryStatement);
 			while(rs.next()) {
 				Item item = new Item();
@@ -146,7 +154,6 @@ public class ItemDao {
 			System.out.println(e);
 		}
 		/*Sample data ends*/
-		
 		return items;
 	}
 
