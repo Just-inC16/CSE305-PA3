@@ -142,7 +142,8 @@ public class BidDao {
 		// ADDED 4]
 		try {
 			ResultSet rs = Jdbc.newStatement(
-				"(SELECT B.* FROM BidWon as B, Auction as A, Item as I WHERE\n" +
+				"SELECT * FROM\n" +
+				"((SELECT B.* FROM BidWon as B, Auction as A, Item as I WHERE\n" +
 				"	B.AuctionID = A.AuctionID AND\n" +
 				"	A.ItemID = I.ItemID AND\n" +
 				"   I.Name LIKE \"%" + searchKeyword + "%\")\n" +
@@ -150,7 +151,8 @@ public class BidDao {
 				"(SELECT B.* FROM BidWon as B, Customer as C WHERE\n" +
 				"	C.CustomerID = B.CustomerID AND\n" +
 				"   (C.LastName LIKE \"%" + searchKeyword + "%\" OR\n" +
-				"   C.FirstName LIKE \"%" + searchKeyword + "%\"));");
+				"   C.FirstName LIKE \"%" + searchKeyword + "%\"))) as U\n" +
+				"ORDER BY U.AuctionID DESC;");
 
 			while(rs.next()) {
 				Bid bid = new Bid();
