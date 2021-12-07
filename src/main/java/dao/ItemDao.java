@@ -362,21 +362,37 @@ public class ItemDao {
 		List<Auction> auctions = new ArrayList<Auction>();
 		
 		/*Sample data begins*/
-		for (int i = 0; i < 4; i++) {
-			Item item = new Item();
-			item.setItemID(123);
-			item.setDescription("sample description");
-			item.setType("BOOK");
-			item.setName("Sample Book");
-			items.add(item);
-			
-			Auction auction = new Auction();
-			auction.setMinimumBid(100);
-			auction.setBidIncrement(10);
-			auctions.add(auction);
+		
+		try {
+			// ResultSet rs = Jdbc.newStatement("SELECT * FROM Customer;");
+			if (itemName == null){
+				itemName = "";
+			}
+			//Need more[applies to the other properties]
+			String queryStatement="SELECT * FROM Auction, Item"
+					+ " WHERE Item.Name LIKE '%"+itemName+"%'";
+			System.out.println("Query statement is: " + queryStatement);
+			ResultSet rs = Jdbc.newStatement(queryStatement);
+			while(rs.next()) {
+				//Add the corresponding item information 
+				Item item = new Item();
+				item.setItemID(rs.getInt("ItemID"));
+				item.setName(rs.getString("Name"));
+				item.setDescription(rs.getString("Description"));
+				item.setType(rs.getString("Type"));
+				items.add(item);
+				
+				//Add the corresponding auction information
+				Auction auction=new Auction();
+				auction.setBidIncrement(rs.getFloat("BidIncrement"));
+				auction.setMinimumBid(rs.getFloat("MinimumBid"));
+				auctions.add(auction);
+			}	
+		}
+		catch(Exception e) {
+			System.out.println(e);
 		}
 		/*Sample data ends*/
-		
 		output.add(items);
 		output.add(auctions);
 		
@@ -402,18 +418,34 @@ public class ItemDao {
 		List<Auction> auctions = new ArrayList<Auction>();
 				
 		/*Sample data begins*/
-		for (int i = 0; i < 4; i++) {
-			Item item = new Item();
-			item.setItemID(123);
-			item.setDescription("sample description");
-			item.setType("BOOK");
-			item.setName("Sample Book");
-			items.add(item);
-			
-			Auction auction = new Auction();
-			auction.setMinimumBid(100);
-			auction.setBidIncrement(10);
-			auctions.add(auction);
+		try {
+			// ResultSet rs = Jdbc.newStatement("SELECT * FROM Customer;");
+			if (itemType == null){
+				itemType = "";
+			}
+			//Need more[applies to the other properties]
+			String queryStatement="SELECT * FROM Auction, Item"
+					+ " WHERE Item.Type='"+itemType+"'";
+			System.out.println("Query statement is: " + queryStatement);
+			ResultSet rs = Jdbc.newStatement(queryStatement);
+			while(rs.next()) {
+				//Add the corresponding item information 
+				Item item = new Item();
+				item.setItemID(rs.getInt("ItemID"));
+				item.setName(rs.getString("Name"));
+				item.setDescription(rs.getString("Description"));
+				item.setType(rs.getString("Type"));
+				items.add(item);
+				
+				//Add the corresponding auction information
+				Auction auction=new Auction();
+				auction.setBidIncrement(rs.getFloat("BidIncrement"));
+				auction.setMinimumBid(rs.getFloat("MinimumBid"));
+				auctions.add(auction);
+			}	
+		}
+		catch(Exception e) {
+			System.out.println(e);
 		}
 		/*Sample data ends*/
 		
@@ -452,3 +484,6 @@ public class ItemDao {
 
 	}
 }
+
+
+

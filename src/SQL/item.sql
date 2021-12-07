@@ -21,4 +21,7 @@ VALUES
 SELECT Item.Name,  Item.Type, Item.Description, SUM(BidWon.BidPrice) AS TotalGenerated FROM BidWon, Auction, Item 
 	WHERE BidWon.AuctionID = Auction.AuctionID AND Auction.ItemID = Item.ItemID AND
 		name LIKE '%t%' GROUP BY Item.Name;
+SELECT * from auction, item where Item.Type='Titanic';
+SELECT * FROM Auction, Item WHERE Item.Type='Electronic';
+SELECT * FROM Auction, Item WHERE Item.Type='DVD';
 select * from Item;
