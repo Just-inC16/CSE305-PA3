@@ -3,9 +3,9 @@ package jdbc;
 import java.sql.*;
 
 public class Jdbc {
-	static String DB_URL = "jdbc:mysql://localhost:3306/cse305pa3";
-	static String USER = "root";
-	static String PASS = "365365365jJkK;"; // password here
+	public static String DB_URL = "jdbc:mysql://localhost:3306/cse305pa3";
+	public static String USER = "root";
+	public static String PASS = "365365365jJkK;"; // password here
 
 	public static Statement base() {
 		Statement st = null;

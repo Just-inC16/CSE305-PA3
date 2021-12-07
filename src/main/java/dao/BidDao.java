@@ -1,13 +1,11 @@
 package dao;
 
-import java.sql.ResultSet;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 import jdbc.Jdbc;
 import model.Bid;
-import model.Customer;
-import model.Item;
 
 public class BidDao {
 
@@ -28,10 +26,7 @@ public class BidDao {
 		// ADDED 13]
 		try {
 			ResultSet rs = Jdbc.newStatement(
-	"SELECT \n" +
-				"\tBid.CustomerID,\n" +
-				"\tBid.BidTime,\n" +
-				"\tBid.BidPrice\n" +
+	"SELECT Bid.*\n" +
 				"FROM Bid,Auction\n" +
 				"WHERE\n" +
 				"\tBid.AuctionID = Auction.AuctionID AND\n" +
@@ -54,7 +49,7 @@ public class BidDao {
 		return bids;
 	}
 
-	// C ADDED 14]
+	// C
 	public List<Bid> getAuctionHistory(String customerID) {
 		
 		System.out.println("*************** getAuctionHistory() ***************");

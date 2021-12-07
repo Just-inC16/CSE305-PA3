@@ -247,7 +247,7 @@ public class CustomerDao {
 	}
 
 	// ---------- ---------- ---------- ----------
-	// [by login]
+	// NEEDS FIX [by login]
 	public String getCustomerID(String username) {
 		/*
 		 * This method returns the Customer's ID based on the provided email address
@@ -262,7 +262,7 @@ public class CustomerDao {
 		System.out.println("*******Get Customer by ID based on email addr**********");
 		String foundCustomerID=null;
 		try {
-			String queryStatement="Select customerID from customer where email='"+username+"'";
+			String queryStatement="Select customerID from customer where email='"+username+"';";
 			System.out.println(queryStatement);
 			ResultSet rs = Jdbc.newStatement(queryStatement);
 			foundCustomerID= rs.getString("CustomerID");
@@ -270,6 +270,7 @@ public class CustomerDao {
 		catch(Exception e ) {
 			System.out.println(e);
 		}
+		System.out.println("CustomerID: " + foundCustomerID);
 		return foundCustomerID;
 	}
 
