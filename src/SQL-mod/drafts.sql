@@ -1,5 +1,5 @@
 -- for working on getSalesListing()
--- used query 4]
+-- customized query 4] to test getSalesListing()
 SELECT I.Name, C.FirstName, C.LastName, B.*
 FROM cse305pa3.bidwon as B, Customer as C, Item as I;
 
