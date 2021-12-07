@@ -126,13 +126,42 @@ public class BidDao {
 		 */
 
 		/*Sample data begins*/
+		/*
 		for (int i = 0; i < 10; i++) {
+
 			Bid bid = new Bid();
 			bid.setAuctionID(123);
 			bid.setCustomerID("123-12-1234");
 			bid.setBidTime("2008-12-11");
 			bid.setBidPrice(100);
 			bids.add(bid);			
+		}
+		*/
+
+
+		// ADDED 4]
+		try {
+			ResultSet rs = Jdbc.newStatement(
+				"(SELECT B.* FROM BidWon as B, Auction as A, Item as I WHERE\n" +
+				"	B.AuctionID = A.AuctionID AND\n" +
+				"	A.ItemID = I.ItemID AND\n" +
+				"   I.Name LIKE \"%" + searchKeyword + "%\")\n" +
+				"UNION\n" +
+				"(SELECT B.* FROM BidWon as B, Customer as C WHERE\n" +
+				"	C.CustomerID = B.CustomerID AND\n" +
+				"   (C.LastName LIKE \"%" + searchKeyword + "%\" OR\n" +
+				"   C.FirstName LIKE \"%" + searchKeyword + "%\"));");
+
+			while(rs.next()) {
+				Bid bid = new Bid();
+				bid.setAuctionID(rs.getInt("AuctionID"));
+				bid.setCustomerID(rs.getString("CustomerId"));
+				bid.setBidTime(rs.getString("BidTime"));
+				bid.setBidPrice(rs.getFloat("BidPrice"));
+				bids.add(bid);
+			}
+		} catch(Exception e) {
+			System.out.println(e);
 		}
 		/*Sample data ends*/
 		
