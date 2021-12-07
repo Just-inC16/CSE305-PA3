@@ -141,7 +141,7 @@ public class EmployeeDao {
 		return employee;
 	}
 
-	// ---------- ---------- ---------- ----------
+
 	// TESTED [by login]
 	public String getEmployeeID(String username) {
 		/*
@@ -168,7 +168,7 @@ public class EmployeeDao {
 		return foundEmployeeID;
 	}
 
-	// M ADDED
+	// M TESTED
 	public String addEmployee(Employee employee) {
 
 		/*

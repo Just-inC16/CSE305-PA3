@@ -26,6 +26,7 @@ WHERE
 	Bid.AuctionID = 1 -- (?) provided
 ORDER BY BidTime;
 
+-- used for getAuctionHistory()
 -- 14] A history of all current and past auctions a customer has taken part in
 /*SELECT
 	Auction.AuctionID, 
@@ -45,11 +46,11 @@ SELECT Bid.*
 FROM Bid, Auction
 WHERE 
 Bid.AuctionID = Auction.AuctionID AND
-Bid.CustomerID = "000-00-0001" -- (?) provided
+Bid.CustomerID = "000-00-0006" -- (?) provided
 ORDER BY Bid.BidTime DESC;
 
 -- 15] Items sold by a given seller and corresponding auction info
-SELECT 
+/* SELECT 
 	Auction.AuctionID,
 	Item.ItemID,
 	Item.Name,
@@ -60,7 +61,15 @@ FROM Item, Auction, Post
 WHERE 
 	Post.AuctionID = Auction.AuctionID AND 
 	Auction.ItemID = Item.ItemID AND
-	Post.CustomerID = "000-00-0001"; -- (?) provided
+	Post.CustomerID = "000-00-0003"; -- (?) provided */
+    
+-- 15 MOD]
+SELECT I.*, A.*, P.*
+FROM Item as I, Auction as A, Post as P
+WHERE 
+	I.ItemID = A.ItemID AND
+	A.AuctionID = P.AuctionID AND 
+	P.CustomerID = "000-00-0003"; -- (?) provided
 
 -- 16] Items available of a particular type and corresponding auction info
 SELECT 
@@ -142,7 +151,3 @@ FROM ItemTypeCustomerBought, BestSellerItemByItemType
 WHERE
 	CustomerID = "000-00-0004" AND -- (?) provided
 	ItemTypeCustomerBought.Type = BestSellerItemByItemType.Type;*/
-
-SELECT Item.Type
-FROM Item
-GROUP BY Item.Type;

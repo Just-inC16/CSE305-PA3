@@ -137,7 +137,7 @@ CREATE TABLE Bid (
 );
 
 -- VIEWS needed
-CREATE VIEW BidWon AS
+/*CREATE VIEW BidWon AS
 SELECT Bid.CustomerID, Bid.AuctionID, Bid.BidTime, Bid.BidPrice
 	FROM (
 		SELECT AuctionID, BidTime, MAX(BidPrice) as MaxBid
@@ -159,4 +159,4 @@ CREATE VIEW BestSellerItemByItemType AS
 SELECT Item.Type, Item.Name, MAX(Auction.Copies_Sold)
 FROM Auction, Item
 WHERE Auction.ItemID = Item.ItemID
-GROUP BY Item.Type;
+GROUP BY Item.Type;*/

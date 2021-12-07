@@ -9,7 +9,7 @@ import model.Bid;
 
 public class BidDao {
 
-	// C ADDED 13] View Bid History -> See Auction
+	// C TESTED 13] View Bid History -> See Auction
 	public List<Bid> getBidHistory(String auctionID) {
 		
 		System.out.println("*************** getBidHistory() ***************");
@@ -49,7 +49,7 @@ public class BidDao {
 		return bids;
 	}
 
-	// C ADDED 14]
+	// C TESTED 14]
 	public List<Bid> getAuctionHistory(String customerID) {
 		
 		System.out.println("*************** getAuctionHistory() ***************");

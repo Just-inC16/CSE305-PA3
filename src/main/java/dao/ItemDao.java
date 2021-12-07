@@ -135,7 +135,7 @@ public class ItemDao {
 		return items;
 	}
 
-	// CR
+	// C & CR ADDED 12]
 	public List<Item> getItemSuggestions(String customerID) {
 		
 		/*
@@ -149,7 +149,7 @@ public class ItemDao {
 		List<Item> items = new ArrayList<Item>();
 		
 		/*Sample data begins*/
-		for (int i = 0; i < 4; i++) {
+		/*for (int i = 0; i < 4; i++) {
 			Item item = new Item();
 			item.setItemID(123);
 			item.setDescription("sample description");
@@ -157,6 +157,27 @@ public class ItemDao {
 			item.setName("Sample Book");
 			item.setNumCopies(2);
 			items.add(item);
+		}*/
+
+		// ADDED 12]
+		try {
+			ResultSet rs = Jdbc.newStatement(
+	"SELECT B.*\n" +
+				"FROM ItemTypeCustomerBought as I, BestSellerItemByItemType as B\n" +
+				"WHERE I.Type = B.Type AND CustomerID = \""+ customerID +"\";");
+
+			while(rs.next()) {
+				Item item=new Item();
+				item.setItemID(rs.getInt("ItemID"));
+				item.setName(rs.getString("Name"));
+				item.setType(rs.getString("Type"));
+				item.setYearManufactured(rs.getInt("Manufactured"));
+				item.setNumCopies(rs.getInt("NumCopies"));
+				item.setDescription(rs.getString("Description"));
+				items.add(item);
+			}
+		} catch(Exception e) {
+			System.out.println(e);
 		}
 		/*Sample data ends*/
 		
@@ -187,25 +208,69 @@ public class ItemDao {
 		List<Auction> auctions = new ArrayList<Auction>();
 		
 		/*Sample data begins*/
-		for (int i = 0; i < 4; i++) {
+		for (int i = 0; i < 2; i++) {
 			Item item = new Item();
-			item.setItemID(123);
-			item.setDescription("sample description");
-			item.setType("BOOK");
-			item.setName("Sample Book");
+			item.setItemID(123);						// printed
+			item.setDescription("sample description");	// printed
+			item.setType("BOOK");						// printed
+			item.setName("Sample Book");				// printed
 			items.add(item);
-			
-			Bid bid = new Bid();
-			bid.setCustomerID("123-12-1234");
-			bid.setBidPrice(120);
-			bids.add(bid);
-			
+
 			Auction auction = new Auction();
-			auction.setMinimumBid(100);
-			auction.setBidIncrement(10);
-			auction.setAuctionID(123);
+			auction.setMinimumBid(100);			// printed
+			auction.setBidIncrement(10);		// printed
+			auction.setAuctionID(123);			// hidden
 			auctions.add(auction);
+
+			Bid bid = new Bid();
+			bid.setCustomerID("123-12-1234");	// printed
+			bid.setBidPrice(120);				// hidden
+			bids.add(bid);
 		}
+
+		// ADDED
+		try {
+			ResultSet rs = Jdbc.newStatement(
+	"SELECT I.*, A.*, P.*\n" +
+				"FROM Item as I, Auction as A, Post as P\n" +
+				"WHERE \n" +
+				"\tI.ItemID = A.ItemID AND\n" +
+				"\tA.AuctionID = P.AuctionID AND \n" +
+				"\tP.CustomerID = \""+ sellerID +"\";");
+
+			while(rs.next()) {
+				Item item = new Item();
+				item.setItemID(rs.getInt("ItemID"));
+				item.setName(rs.getString("Name"));
+				item.setType(rs.getString("Type"));
+				item.setYearManufactured(rs.getInt("Manufactured"));
+				item.setNumCopies(rs.getInt("NumCopies"));
+				item.setDescription(rs.getString("Description"));
+				items.add(item);
+
+				Auction auction = new Auction();
+				auction.setAuctionID(rs.getInt("AuctionID"));
+				auction.setBidIncrement(rs.getFloat("BidIncrement"));
+				auction.setMinimumBid(rs.getFloat("MinimumBid"));
+				auction.setCopiesSold(rs.getInt("Copies_Sold"));
+				auction.setItemID(rs.getInt("ItemID"));
+				auction.setClosingBid(rs.getInt("ClosingBid"));
+				auction.setCurrentBid(rs.getInt("CurrentBid"));
+				auction.setCurrentHighBid(rs.getInt("CurrentHighBid"));
+				auction.setReserve(rs.getInt("ReservePrice"));
+				auctions.add(auction);
+
+				Bid bid = new Bid();
+				bid.setAuctionID(rs.getInt("AuctionID"));
+				bid.setCustomerID(rs.getString("CustomerId"));
+				bid.setBidTime(rs.getString("BidTime"));
+				bid.setBidPrice(rs.getFloat("BidPrice"));
+				bids.add(bid);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
 		/*Sample data ends*/
 		
 		output.add(items);

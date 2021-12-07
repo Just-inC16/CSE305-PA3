@@ -1,7 +1,7 @@
 -- RUN THESE THIRD
 -- 3.2 Customer-Representative-Level Transactions
 
--- didn't really use for getCustomerMailingList()
+-- used for getCustomerMailingList() [not really]
 -- 11] Produce customer mailing lists
 SELECT Customer.Email 
 FROM Customer;
@@ -15,17 +15,27 @@ WHERE
 	Auction.ItemID = Item.ItemID;
 
 -- VIEW #3
-CREATE VIEW BestSellerItemByItemType AS
+/* CREATE VIEW BestSellerItemByItemType AS
 SELECT Item.Type, Item.Name, MAX(Auction.Copies_Sold)
+FROM Auction, Item
+WHERE Auction.ItemID = Item.ItemID
+GROUP BY Item.Type; */
+
+CREATE VIEW BestSellerItemByItemType AS
+SELECT Item.*, MAX(Auction.Copies_Sold)
 FROM Auction, Item
 WHERE Auction.ItemID = Item.ItemID
 GROUP BY Item.Type;
 
-SELECT * FROM BestSellerItemByItemType;
-
+-- used for getItemSuggestions()
 -- 12] Produce a list of item suggestions for a given customer (based on that customer's past purchases)
-SELECT BestSellerItemByItemType.Name
+/*SELECT BestSellerItemByItemType.Name
 FROM ItemTypeCustomerBought, BestSellerItemByItemType
 WHERE
-	CustomerID = 4 AND -- (?) provided
-	ItemTypeCustomerBought.Type = BestSellerItemByItemType.Type;
+	CustomerID = "000-00-0005" AND -- (?) provided
+	ItemTypeCustomerBought.Type = BestSellerItemByItemType.Type;*/
+    
+SELECT B.*
+FROM ItemTypeCustomerBought as I, BestSellerItemByItemType as B
+WHERE I.Type = B.Type AND CustomerID = "000-00-0005"; -- (?) provided
+

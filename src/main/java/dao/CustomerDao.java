@@ -16,7 +16,7 @@ public class CustomerDao {
 	 * This class handles all the database operations related to the customer table
 	 */
 
-	// CR
+	// CR TEST THIS
 	/**
 	 * @param searchKeyword
 	 * @return ArrayList<Customer> object
@@ -138,7 +138,6 @@ public class CustomerDao {
 		return customer;
 	}
 
-	// ---------- ---------- ---------- ----------
 	// CR TESTED
 	public List<Customer> getCustomerMailingList() {
 
@@ -215,7 +214,7 @@ public class CustomerDao {
 		return customer;
 	}
 
-	// C
+	// C TESTED
 	public List<Customer> getSellers() {
 
 		/*
@@ -228,17 +227,29 @@ public class CustomerDao {
 		List<Customer> customers = new ArrayList<Customer>();
 
 		/*Sample data begins*/
-		for (int i = 0; i < 10; i++) {
-			Customer customer = new Customer();
-			customer.setCustomerID("111-11-1111");
-			customer.setAddress("123 Success Street");
-			customer.setLastName("Lu");
-			customer.setFirstName("Shiyong");
-			customer.setCity("Stony Brook");
-			customer.setState("NY");
-			customer.setEmail("shiyong@cs.sunysb.edu");
-			customer.setZipCode(11790);
-			customers.add(customer);
+
+		// ADDED
+		try {
+			ResultSet rs = Jdbc.newStatement(
+	"SELECT Distinct C.*\n" +
+				"FROM Customer as C, Post as P\n" +
+				"WHERE C.CustomerID = P.CustomerID;");
+
+			while(rs.next()) {
+				Customer customer=new Customer();
+				customer.setCustomerID(rs.getString("CustomerId"));
+				customer.setFirstName(rs.getString("firstName"));
+				customer.setLastName(rs.getString("lastName"));
+				customer.setAddress(rs.getString("Address"));
+				customer.setCity(rs.getString("City"));
+				customer.setState(rs.getString("State"));
+				customer.setZipCode(rs.getInt("ZipCode"));
+				customer.setEmail(rs.getString("Email"));
+				customers.add(customer);
+			}
+		}
+		catch(Exception e) {
+			System.out.println(e);
 		}
 		/*Sample data ends*/
 
@@ -246,8 +257,8 @@ public class CustomerDao {
 
 	}
 
-	// ---------- ---------- ---------- ----------
-	// NEEDS FIX [by login]
+
+	// TESTED [by login]
 	public String getCustomerID(String username) {
 		/*
 		 * This method returns the Customer's ID based on the provided email address
@@ -273,7 +284,7 @@ public class CustomerDao {
 		return foundCustomerID;
 	}
 
-	// CR ADDED
+	// CR TESTED
 	public String addCustomer(Customer customer) {
 
 		/*
