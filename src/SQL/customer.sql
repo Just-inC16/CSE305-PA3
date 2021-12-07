@@ -24,4 +24,11 @@ VALUES
 ("john","Smith","John","789 Peace Blvd.","Los Angeles","CA",12345,"(412)443-321","shlu@ic.sunysb.edu","2345-6789-2345-6789",1 ), 
 ("phil", "Phil", "Lewis", "135 Knowledge Lane", "Stony Brook", "NY", 11704, "(516)666-8888", "pml@cs.sunysb.edu", "6789-2345-6789-2345", 1);
 
+insert into customer (customerID, firstName, lastName, Address, City, State, zipCode, telephone, email,CreditCardNum, rating)
+VALUES
+("juschan", "Chan","JusChan", "123 Success Street", "Stony Brook", "NY", 11790, "(516)632-8959", "jc@g", "1234-5678-1234-5678", 18),
+("danlee", "Lee","DanielLee", "123 Success Street", "Stony Brook", "NY", 11790, "(516)632-8959", "dl@g", "1234-5678-1234-5678", 21);
+Update customer set Email="jl@g" where customerID="000-00-0006";
 select * from customer;
+
+

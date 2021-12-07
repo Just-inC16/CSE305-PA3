@@ -467,19 +467,36 @@ public class ItemDao {
 
 		System.out.println("*************** getBestsellersForCustomer() ***************");
 		List<Item> items = new ArrayList<Item>();
-				
+
 		/*Sample data begins*/
-		for (int i = 0; i < 6; i++) {
-			Item item = new Item();
-			item.setItemID(123);
-			item.setDescription("sample description");
-			item.setType("BOOK");
-			item.setName("Sample Book");
-			item.setNumCopies(50);
-			items.add(item);
+		try {
+			if (customerID == null){
+				customerID = "";
+			}
+			//Need more[applies to the other properties]
+			String queryStatement="SELECT BestSellerItemByItemType.Name "
+					+ "FROM ItemTypeCustomerBought, BestSellerItemByItemType"
+					+ " WHERE "
+					+ "CustomerID = '"+customerID+"'  AND "
+					+ "ItemTypeCustomerBought.Type = BestSellerItemByItemType.Type;";
+			System.out.println("Query statement is: \n" + queryStatement);
+			ResultSet rs = Jdbc.newStatement(queryStatement);
+			while(rs.next()) {
+				//Add the corresponding item information 
+				Item item = new Item();
+				item.setItemID(rs.getInt("ItemID"));
+				item.setName(rs.getString("Name"));
+				item.setDescription(rs.getString("Description"));
+				item.setType(rs.getString("Type"));
+				item.setNumCopies(rs.getInt("Copies Sold"));
+				items.add(item);
+			}	
 		}
-		/*Sample data ends*/
+		catch(Exception e) {
+			System.out.println(e);
+		}
 		
+		/*Sample data ends*/
 		return items;
 
 	}
