@@ -17,4 +17,10 @@ VALUES
 ('shiyong', 1,'2021-6-1', 10.0,20.0),
 ('haixia', 2,'2021-6-2', 40.0,55.9);
 
+SELECT Item.Name, Item.Type, Sum(BidWon.BidPrice) AS Total from  BidWon,Auction, Item
+where BidWon.AuctionID = Auction.AuctionID AND Auction.ItemID = Item.ItemID AND 
+-- (CustomerName LIKE 'a%' OR CustomerName LIKE 'a%' OR CustomerName LIKE 'a%')
+(Item.Name LIKE '%' )
+Group by  Item.Name;
 select * from Bid;
+

@@ -5,8 +5,8 @@ import java.sql.*;
 public class Jdbc {
 	public static String DB_URL = "jdbc:mysql://localhost:3306/cse305pa3";
 	public static String USER = "root";
-	public static String PASS = "365365365jJkK;"; // password here
-
+//	public static String PASS = "365365365jJkK;"; // password here
+	public static String PASS="40302000";
 	public static Statement base() {
 		Statement st = null;
 		Connection con;
