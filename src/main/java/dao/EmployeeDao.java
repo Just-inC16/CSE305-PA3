@@ -151,17 +151,20 @@ public class EmployeeDao {
 		 */
 
 		System.out.println("*************** getEmployeeID() ***************");
-		System.out.println("*******Get EmployeeID based on email addr**********");
+		// System.out.println("*******Get EmployeeID based on email addr**********");
 		String foundEmployeeID=null;
 		try {
-			String queryStatement="select employeeID from employee where email='"+username+"'";
-			System.out.println(queryStatement);
+			String queryStatement="select * from employee where email= \""+ username +"\";";
 			ResultSet rs = Jdbc.newStatement(queryStatement);
-			foundEmployeeID= rs.getString("employeeID");
+
+			while(rs.next()) {
+				foundEmployeeID = rs.getString("EmployeeID");
+			}
 		}
 		catch(Exception e ) {
 			System.out.println(e);
 		}
+		System.out.println("EmployeeID: " + foundEmployeeID);
 		return foundEmployeeID;
 	}
 

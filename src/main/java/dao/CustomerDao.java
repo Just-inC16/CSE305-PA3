@@ -256,16 +256,15 @@ public class CustomerDao {
 		 * The Customer's ID is required to be returned as a String
 		 */
 		System.out.println("*************** getCustomerID() ***************");
-		//OLD
-//		return "111-11-1111";
-		//NEW
-		System.out.println("*******Get Customer by ID based on email addr**********");
+		// System.out.println("*******Get Customer by ID based on email addr**********");
 		String foundCustomerID=null;
 		try {
-			String queryStatement="Select customerID from customer where email='"+username+"';";
-			System.out.println(queryStatement);
+			String queryStatement="select customerID from customer where email=\""+username+"\";";
 			ResultSet rs = Jdbc.newStatement(queryStatement);
-			foundCustomerID= rs.getString("CustomerID");
+
+			while(rs.next()) {
+				foundCustomerID = rs.getString("CustomerID");
+			}
 		}
 		catch(Exception e ) {
 			System.out.println(e);

@@ -23,6 +23,7 @@ public class LoginDao {
 		 */
 		
 		/*Sample data begins*/
+		System.out.println("*************** login() ***************");
 		System.out.println("*************** Get Login username & manager ***************");
 		
 		Login login = null;
@@ -61,6 +62,7 @@ public class LoginDao {
 		 */
 		
 		/*Sample data begins*/
+		System.out.println("*************** addUser() ***************");
 		System.out.println("*******Add a User**********");
 		try {
 			String queryStatement="INSERT INTO Login"
