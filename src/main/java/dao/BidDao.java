@@ -1,6 +1,8 @@
 package dao;
 
 import java.sql.*;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -102,11 +104,34 @@ public class BidDao {
 		 */
 
 		/*Sample data begins*/
-		bid.setAuctionID(123);
-		bid.setCustomerID("123-12-1234");
-		bid.setBidTime("2008-12-11");
-		bid.setBidPrice(currentBid);
+//		bid.setAuctionID(auctionID);
+//		bid.setCustomerID(customerID);
+//		bid.setBidTime("2008-12-11");
+//		bid.setBidPrice(currentBid);
 		/*Sample data ends*/
+
+		// 1 Add ‘maxBid’ attribute to schema
+		try{
+			DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+			LocalDateTime now = LocalDateTime.now();
+
+			String queryStatement =
+				"INSERT INTO Bid(customerID, auctionID, bidTime, bidPrice) "
+				+ "VALUES ('"+ customerID+"', '"+ auctionID +"','"+ dtf.format(now) +"','"+ currentBid +"')";
+			Jdbc.deleteStatement(queryStatement);
+
+			bid.setAuctionID(Integer.parseInt(auctionID));
+			bid.setCustomerID(customerID);
+			bid.setBidTime(dtf.format(now));
+			bid.setBidPrice(currentBid);
+
+			String updateStatement = "UPDATE Auction SET CurrentHighBid = " + currentBid + " WHERE " +
+					"AuctionID = " + auctionID + " AND CurrentHighBid < " + currentBid + ";";
+			Jdbc.deleteStatement(updateStatement);
+
+		} catch(Exception e) {
+			System.out.println(e);
+		}
 		
 		return bid;
 	}
