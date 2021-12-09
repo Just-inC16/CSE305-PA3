@@ -127,9 +127,12 @@ public class ItemDao {
 				searchKeyword = "";
 			}
 			//Need more[applies to the other properties]
-			String queryStatement="SELECT Item.Name, Item.Type, Item.Description, SUM(BidWon.BidPrice) AS TotalGenerated FROM BidWon, Auction, Item"
-					+ " WHERE BidWon.AuctionID = Auction.AuctionID AND Auction.ItemID = Item.ItemID AND"
-					+ " name LIKE '%"+searchKeyword+"%' GROUP BY Item.Name, Item.Type";
+			String queryStatement=
+					"SELECT I.ItemID, I.Name, I.Type, I.Description, SUM(BidWon.BidPrice) AS TotalGenerated\n" +
+					"FROM BidWon, Auction, Item as I\n" +
+					"WHERE Auction.ItemID = I.ItemID AND\n" +
+					"BidWon.AuctionID = Auction.AuctionID AND \n" +
+					"name LIKE \"%"+searchKeyword+"%\" GROUP BY I.Name, I.Type;";
 //			String queryStatement2="SELECT Customer.Name, Item.Name, Item.Type, Item.Description, SUM(BidWon.BidPrice) AS TotalGenerated FROM BidWon, Auction, Item, Customer"
 //					+ " WHERE BidWon.AuctionID = Auction.AuctionID AND Auction.ItemID = Item.ItemID AND"
 //					+ " name LIKE '%"+searchKeyword+"%' GROUP BY Item.Name, Item.Type,Customer.Name";
@@ -142,6 +145,7 @@ public class ItemDao {
 			ResultSet rs = Jdbc.newStatement(queryStatement);
 			while(rs.next()) {
 				Item item = new Item();
+				item.setItemID(rs.getInt("ItemID"));
 				item.setSoldPrice(rs.getInt("TotalGenerated"));
 				item.setName(rs.getString("Name"));
 				item.setDescription(rs.getString("Description"));
@@ -476,13 +480,11 @@ public class ItemDao {
 				customerID = "";
 			}
 			//Need more[applies to the other properties]
-			String queryStatement="SELECT BestSellerItemByItemType.Name "
-					+ "FROM ItemTypeCustomerBought, BestSellerItemByItemType"
-					+ " WHERE "
-					+ "CustomerID = '"+customerID+"'  AND "
-					+ "ItemTypeCustomerBought.Type = BestSellerItemByItemType.Type;";
-			System.out.println("Query statement is: \n" + queryStatement);
-			ResultSet rs = Jdbc.newStatement(queryStatement);
+			ResultSet rs = Jdbc.newStatement(
+					"SELECT B.*\n" +
+							"FROM ItemTypeCustomerBought as I, BestSellerItemByItemType as B\n" +
+							"WHERE I.Type = B.Type AND CustomerID = \""+ customerID +"\";");
+			// ResultSet rs = Jdbc.newStatement(queryStatement);
 			while(rs.next()) {
 				//Add the corresponding item information 
 				Item item = new Item();
