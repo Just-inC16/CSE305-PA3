@@ -361,7 +361,7 @@ public class ItemDao {
 			}
 			//Need more[applies to the other properties]
 			String queryStatement="SELECT * FROM Auction, Item"
-					+ " WHERE Item.Name LIKE '%"+itemName+"%'";
+					+ " WHERE Auction.AuctionID = Item.ItemID AND Item.Name LIKE '%"+itemName+"%'";
 			System.out.println("Query statement is: " + queryStatement);
 			ResultSet rs = Jdbc.newStatement(queryStatement);
 			while(rs.next()) {
@@ -416,7 +416,7 @@ public class ItemDao {
 			}
 			//Need more[applies to the other properties]
 			String queryStatement="SELECT * FROM Auction, Item"
-					+ " WHERE Item.Type='"+itemType+"'";
+					+ " WHERE Auction.AuctionID=Item.ItemID AND Item.Type='"+itemType+"'";
 			System.out.println("Query statement is: " + queryStatement);
 			ResultSet rs = Jdbc.newStatement(queryStatement);
 			while(rs.next()) {
