@@ -9,6 +9,7 @@ public class Login {
 	private String username;
 	private String password;
 	private String role;
+	
 	public String getRole() {
 		return role;
 	}

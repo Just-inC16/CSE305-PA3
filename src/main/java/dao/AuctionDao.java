@@ -137,25 +137,63 @@ public class AuctionDao {
 		 */
 
 		/*Sample data begins*/
-		for (int i = 0; i < 4; i++) {
-			item.setItemID(123);
-			item.setDescription("sample description");
-			item.setType("BOOK");
-			item.setName("Sample Book");
-
-			bid.setCustomerID("123-12-1234");
-			bid.setBidPrice(120);
-
-			customer.setCustomerID("123-12-1234");
-			customer.setFirstName("Shiyong");
-			customer.setLastName("Lu");
-
-			auction.setMinimumBid(100);
-			auction.setBidIncrement(10);
-			auction.setCurrentBid(110);
-			auction.setCurrentHighBid(115);
-			auction.setAuctionID(Integer.parseInt(auctionID));
+		try {
+			//Fetch Auction information based on AuctionId
+			ResultSet rs = Jdbc.newStatement(
+				"SELECT * \n" +
+				"FROM Auction"+ 
+				"WHERE Auction.AuctionID;");
+			auction.setMinimumBid(rs.getInt("MinimumBid"));
+			auction.setBidIncrement(rs.getFloat("BidIncrement"));
+			auction.setCurrentBid(rs.getInt("CurrentBid"));
+			auction.setCurrentHighBid(rs.getInt("CurrentHigh"));
+			auction.setAuctionID(rs.getInt("AuctionID"));
+			
+			//Fetch ItemID information based on ItemId
+			rs = Jdbc.newStatement(
+				"SELECT * \n" +
+				"FROM Item"+ 
+				"WHERE Item.ItemID;");
+			item.setItemID(rs.getInt("ItemID"));
+			item.setDescription(rs.getString("Description"));
+			item.setType(rs.getString("Type"));
+			item.setName(rs.getString("Name"));
+			//Fetch Bid details 
+			rs = Jdbc.newStatement(
+					"SELECT * \n" +
+					"FROM Bid;");
+			bid.setCustomerID(rs.getString("CustomerID"));
+			bid.setBidPrice(rs.getFloat("BidPrice"));
+			//Fetch Customer information 
+			rs = Jdbc.newStatement(
+					"SELECT * \n" +
+					"FROM Customer;");
+			customer.setCustomerID(rs.getString("CustomerID"));
+			customer.setFirstName(rs.getString("FirstName"));
+			customer.setLastName(rs.getString("LastName"));
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
+		
+//		for (int i = 0; i < 4; i++) {
+//			item.setItemID(123);
+//			item.setDescription("sample description");
+//			item.setType("BOOK");
+//			item.setName("Sample Book");
+//
+//			bid.setCustomerID("123-12-1234");
+//			bid.setBidPrice(120);
+//
+//			customer.setCustomerID("123-12-1234");
+//			customer.setFirstName("Shiyong");
+//			customer.setLastName("Lu");
+//
+//			auction.setMinimumBid(100);
+//			auction.setBidIncrement(10);
+//			auction.setCurrentBid(110);
+//			auction.setCurrentHighBid(115);
+//			auction.setAuctionID(Integer.parseInt(auctionID));
+//		}
 		/*Sample data ends*/
 
 		output.add(item);

@@ -59,26 +59,17 @@ VALUES
     (5, "Intel Gaming PC", "Electronic", 2020, 1, "Intel i7 11700K");
 
 -- Add auction
-/* 	Auction data
-	AuctionID INT NOT NULL,	 
-	Copies_Sold INT, 		
-	MinimumBid DECIMAL(18, 2),			
-	ReservePrice DECIMAL(18, 2),
-    BidIncrement DECIMAL(18, 2),      
-    EmployeeID INTEGER NOT NULL,	
-	ItemID INTEGER NOT NULL*/
--- AuctionID INT NOT NULL,
--- 	BidIncrement float4, 
--- 	MinimumBid float4,
--- 	Copies_Sold INTEGER,
--- 	Monitor INTEGER,
--- 	ClosingBid INTEGER,
---     CurrentBid INTEGER,
--- 	CurrentHighBid INTEGER,
--- 	ReservePrice INTEGER,
--- 	ItemID INT NOT NULL,
--- 	EmployeeID CHAR(20) NOT NULL,
--- INSERT INTO Auction(AuctionID, Monitor, ItemID, Copies_Sold, MinimumBid, ReservePrice, BidIncrement, ClosingBid, CurrentBid, CurrentHighBid)
+/*AuctionID INT NOT NULL,
+BidIncrement float4, 
+MinimumBid float4,
+Copies_Sold INTEGER,
+Monitor INTEGER,
+ClosingBid INTEGER,
+CurrentBid INTEGER,
+CurrentHighBid INTEGER,
+ReservePrice INTEGER,
+ItemID INT NOT NULL,
+EmployeeID CHAR(20) NOT NULL*/
 INSERT INTO Auction(AuctionID, ItemID, EmployeeID, BidIncrement, MinimumBid, CopiesSold, Monitor,  ClosingBid, CurrentBid, CurrentHighBid, ReservePrice  )
 VALUES
 	(1, 1, "100-00-0000",2.0, 5.50, 15, 50, 200000000,30,25,26),

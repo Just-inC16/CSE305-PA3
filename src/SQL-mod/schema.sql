@@ -37,33 +37,30 @@ CREATE TABLE Customer (
 	ZipCode INTEGER,
     Telephone CHAR(13), 
 	Email CHAR(64),
-    
+	CreditCardNum CHAR(16),  
+    Rating INTEGER,
     -- Password_ CHAR(20),	-- added
 	-- Role_ CHAR(40),		-- added
     
-    Rating DECIMAL,
-    CreditCardNum LONG,
 	PRIMARY KEY (CustomerID)
 );
 
 CREATE TABLE Employee ( 	
 	EmployeeID CHAR(12) NOT NULL,	-- changed from INT	
+    StartDate DATE,  	  
+    HourlyRate FLOAT,
+    Level_ CHAR(20),
+	FirstName CHAR(20) NOT NULL,
     LastName CHAR(20) NOT NULL, 	 
-	FirstName CHAR(20) NOT NULL, 	   
     Address CHAR(64),
 	City CHAR(20),				 
 	State CHAR(2),
 	ZipCode INTEGER,
+    Email CHAR(64),
     Telephone CHAR(13), 
-	Email CHAR(64),
-    
+	Revenue CHAR(10),	-- added
     -- Password_ CHAR(20),	-- added
 	-- Role_ CHAR(40),		-- added
-    
-    StartDate DATE,		 
-	HourlyRate DECIMAL(18, 2),	 
-    Level_ CHAR(20),			-- added from INT
-    Revenue CHAR(10),	-- added
     PRIMARY KEY (EmployeeID)
 );
 
@@ -76,42 +73,28 @@ CREATE TABLE Login (
 );
 
 CREATE TABLE Item (		
-	ItemID INT NOT NULL,	
+	ItemID INTEGER NOT NULL,	
+    Description VARCHAR(256),
+    Type CHAR(16),          -- item_type
     Name CHAR(64), 			-- item_name
-	Type CHAR(16),			-- item_type
-    Manufactured  INT,		-- year_manufactured
-    NumCopies INT, 			-- amount_in_stock
-	Description VARCHAR(256),
+	NumCopies INTEGER, 			-- amount_in_stock			
+    Manufactured  INTEGER,		-- year_manufactured
+    SoldPrice FLOAT,
     PRIMARY KEY (ItemID)
 );
 
 CREATE TABLE Auction (	
-	-- AuctionID INT NOT NULL,	
---     
---     EmployeeID CHAR(20) NOT NULL,
---     ItemID INTEGER NOT NULL,		-- foreign key
---     Monitor INT,
---     Copies_Sold INT, 		
---     MinimumBid DECIMAL(18, 2),	
--- 	ReservePrice DECIMAL(18, 2),
--- 	BidIncrement DECIMAL(18, 2),  
--- 	
---     ClosingBid DECIMAL(18, 2), 
---     CurrentBid DECIMAL(18, 2), 
---     CurrentHighBid DECIMAL(18, 2), 
-    
-    AuctionID INT NOT NULL,
+    AuctionID INTEGER NOT NULL,
 	BidIncrement float4, 
 	MinimumBid float4,
 	CopiesSold INTEGER,
 	Monitor INTEGER,
+    ItemID INTEGER NOT NULL,
 	ClosingBid INTEGER,
     CurrentBid INTEGER,
 	CurrentHighBid INTEGER,
 	ReservePrice INTEGER,
-	ItemID INT NOT NULL,
 	EmployeeID CHAR(12),
-    
 	    
 	PRIMARY KEY (AuctionID),
 	FOREIGN KEY (EmployeeID) REFERENCES Employee(EmployeeID)
@@ -124,25 +107,27 @@ CREATE TABLE Auction (
 
 -- Relationship tables
 CREATE TABLE Post (		
-	PostDate DATETIME,			-- openDate
+	CustomerID CHAR(12) NOT NULL,	-- foreign key, seller_id -- changed from INT
+    AuctionID INTEGER NOT NULL,		-- foreign key
+    PostDate DATETIME,			-- openDate
     ExpireDate DATETIME,		-- closeDate
-    AuctionID INT NOT NULL,		-- foreign key
-	CustomerId CHAR(12) NOT NULL,	-- foreign key, seller_id -- changed from INT
+    
 	PRIMARY KEY (AuctionID, CustomerId, PostDate),
 	FOREIGN KEY(AuctionID) REFERENCES Auction(AuctionID)
 		ON DELETE CASCADE
 		ON UPDATE CASCADE,
-	FOREIGN KEY(CustomerId) REFERENCES Customer(CustomerId)
+	FOREIGN KEY(CustomerID) REFERENCES Customer(CustomerID)
 		ON DELETE CASCADE
 		ON UPDATE CASCADE
 );
 
 CREATE TABLE Bid (		
-	AuctionID INT NOT NULL,		-- foreign key
-	CustomerId CHAR(12) NOT NULL,	-- foreign key, buyer_id -- changed from INT
+	CustomerID CHAR(12) NOT NULL,	-- foreign key, buyer_id -- changed from INT
+    AuctionID INTEGER NOT NULL,		-- foreign key
 	BidTime DATETIME,			-- bought_date
-    BidPrice DECIMAL(18, 2),	-- bought_price
-    -- Where is maxBid???
+    BidPrice FLOAT,	-- bought_price
+    MaxBid FLOAT,
+    
 	PRIMARY KEY (AuctionID, CustomerId, BidTime),
 	FOREIGN KEY(AuctionID) REFERENCES Auction(AuctionID)
 		ON DELETE CASCADE

@@ -128,10 +128,10 @@ ORDER BY TotalSpent DESC
 LIMIT 1;
 
 -- 8] Produce a Best-Sellers list of items
-SELECT Item.Name, Auction.Copies_Sold
+SELECT Item.Name, Auction.CopiesSold
 FROM Auction, Item
 WHERE 
 	Auction.ItemID = Item.ItemID AND 
-	Auction.Copies_Sold > 0
+	Auction.CopiesSold > 0
 GROUP BY Auction.ItemID
-ORDER BY Auction.Copies_Sold DESC;
+ORDER BY Auction.CopiesSold DESC;

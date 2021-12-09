@@ -22,7 +22,7 @@ WHERE Auction.ItemID = Item.ItemID
 GROUP BY Item.Type; */
 
 CREATE VIEW BestSellerItemByItemType AS
-SELECT Item.*, MAX(Auction.Copies_Sold)
+SELECT Item.*, MAX(Auction.CopiesSold)
 FROM Auction, Item
 WHERE Auction.ItemID = Item.ItemID
 GROUP BY Item.Type;

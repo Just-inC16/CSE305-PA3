@@ -78,7 +78,7 @@ SELECT
 	Auction.AuctionID,
 	Auction.BidIncrement,
 	Auction.MinimumBid, 
-	Auction.Copies_Sold
+	Auction.CopiesSold
 FROM Item, Auction
 WHERE 
 	Item.ItemID = Auction.ItemID AND
@@ -92,7 +92,7 @@ WHERE
 SELECT Item.Name, Auction.AuctionID,
 	Auction.BidIncrement,
 	Auction.MinimumBid, 
-	Auction.Copies_Sold
+	Auction.CopiesSold
 FROM Item, Auction 
 WHERE 
 	Item.ItemID = Auction.ItemID AND
@@ -103,7 +103,7 @@ WHERE
 SELECT Item.Name, Auction.AuctionID,
 	Auction.BidIncrement,
 	Auction.MinimumBid, 
-	Auction.Copies_Sold
+	Auction.CopiesSold
 FROM Item, Auction 
 WHERE 
 	Item.ItemID = Auction.ItemID AND
@@ -122,13 +122,13 @@ GROUP BY Auction.ItemID
 ORDER BY Auction.Copies_Sold DESC;*/
 
 -- 18 MOD] 
-SELECT Item.*, Auction.Copies_Sold
+SELECT Item.*, Auction.CopiesSold
 FROM Auction, Item
 WHERE 
 	Auction.ItemID = Item.ItemID AND 
-	Auction.Copies_Sold > 0
+	Auction.CopiesSold > 0
 GROUP BY Auction.ItemID
-ORDER BY Auction.Copies_Sold DESC;
+ORDER BY Auction.CopiesSold DESC;
 
 -- 19] Personalized item suggestion list
 -- VIEW #2 [also exists in query-customer-representative]
