@@ -86,25 +86,43 @@ CREATE TABLE Item (
 );
 
 CREATE TABLE Auction (	
-	AuctionID INT NOT NULL,	
-    Monitor CHAR(12) NOT NULL,		-- foreign key -- changed from INT
-    ItemID INTEGER NOT NULL,		-- foreign key
-    Copies_Sold INT, 		
-    MinimumBid DECIMAL(18, 2),	
-	ReservePrice DECIMAL(18, 2),
-	BidIncrement DECIMAL(18, 2),  
+	-- AuctionID INT NOT NULL,	
+--     EmployeeID CHAR(12) NOT NULL,		-- foreign key -- changed from INT
+--     ItemID INTEGER NOT NULL,		-- foreign key
+--     Copies_Sold INT, 		
+--     MinimumBid DECIMAL(18, 2),	
+-- 	ReservePrice DECIMAL(18, 2),
+-- 	BidIncrement DECIMAL(18, 2),  
 
-    ClosingBid DECIMAL(18, 2), 
-    CurrentBid DECIMAL(18, 2), 
-    CurrentHighBid DECIMAL(18, 2), 
-	    
+--     ClosingBid DECIMAL(18, 2), 
+--     CurrentBid DECIMAL(18, 2), 
+--     CurrentHighBid DECIMAL(18, 2), 
+-- 	    
+-- 	PRIMARY KEY (AuctionID),
+-- 	FOREIGN KEY (EmployeeID) REFERENCES Employee(EmployeeID)
+-- 		ON DELETE CASCADE
+-- 		ON UPDATE CASCADE,
+-- 	FOREIGN KEY (ItemID) REFERENCES Item (ItemID)
+-- 		ON DELETE CASCADE
+-- 		ON UPDATE CASCADE    
+    AuctionID INT NOT NULL,
+	BidIncrement float4, 
+	MinimumBid float4,
+	Copies_Sold INTEGER,
+	Monitor INTEGER,
+	ClosingBid INTEGER,
+    CurrentBid INTEGER,
+	CurrentHighBid INTEGER,
+	ReservePrice INTEGER,
+	ItemID INT NOT NULL,
+	EmployeeID CHAR(20) NOT NULL,
+
+
 	PRIMARY KEY (AuctionID),
-	FOREIGN KEY (Monitor) REFERENCES Employee(EmployeeID)
+	FOREIGN KEY (EmployeeID) REFERENCES Employee(EmployeeID)
 		ON DELETE CASCADE
 		ON UPDATE CASCADE,
 	FOREIGN KEY (ItemID) REFERENCES Item (ItemID)
-		ON DELETE CASCADE
-		ON UPDATE CASCADE    
 );
 
 -- Relationship tables

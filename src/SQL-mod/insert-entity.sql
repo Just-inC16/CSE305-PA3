@@ -67,14 +67,14 @@ VALUES
     BidIncrement DECIMAL(18, 2),      
     EmployeeID INTEGER NOT NULL,	
 	ItemID INTEGER NOT NULL*/
-INSERT INTO Auction(AuctionID, Monitor, ItemID, Copies_Sold, MinimumBid, ReservePrice, BidIncrement, ClosingBid, CurrentBid, CurrentHighBid)
+INSERT INTO Auction(AuctionID, EmployeeID, ItemID, Copies_Sold, MinimumBid, ReservePrice, BidIncrement, ClosingBid, CurrentBid, CurrentHighBid)
 VALUES
-	(1, "200-00-0000", 1, 2, 5.50, 15.00, 0.50, 13.50, 13.50, 13.50),
-    (2, "200-00-0000", 2, 1, 14620.00, 20000.00, 100.00, 16720.00, 16720.00 ,16720.00),
+	(1, "500-00-0000", 1, 2, 5.50, 15.00, 0.50, 13.50, 13.50, 13.50),
+    (2, "500-00-0000", 2, 1, 14620.00, 20000.00, 100.00, 16720.00, 16720.00 ,16720.00),
     (3, "300-00-0000", 3, 1, 900.00, 1500.00, 25.00, 1150.00, 1150.00, 1150.00),
     (4, "300-00-0000", 4, 1, 1800.00, 3000.00, 25.00, 2175.00, 2175.00, 2175.00),
 	(5, "300-00-0000", 5, 1, 1400.00, 2000.00, 25.00, 1800.00, 1800.00, 1800.00),
-    (6, "200-00-0000", 1, 2, 5.50, 15.00, 0.50, 10.50, 10.50, 10.50);
+    (6, "500-00-0000", 1, 2, 5.50, 15.00, 0.50, 10.50, 10.50, 10.50);
 	
 -- 9] Add post
 /* 	Post data

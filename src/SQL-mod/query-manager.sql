@@ -18,7 +18,7 @@ WHERE
 /* SELECT * 
 FROM BidWon
 WHERE BidTime BETWEEN '2021-06-01' -- (?) Particular month; first day
-AND '2021-06-30'; -- (?) Last day of same month  */
+AND '2021-06-30'; -- (?) Last day of samposte month  */
 
 -- 2 MOD]
 SELECT BidWon.BidPrice, Item.Name 
@@ -107,8 +107,8 @@ SELECT Employee.*, SUM(BidWon.BidPrice) AS TotalGenerated
 FROM BidWon, Auction, Employee
 WHERE 
 	BidWon.AuctionID = Auction.AuctionID AND
-	Auction.Monitor = Employee.EmployeeID
-GROUP BY Auction.Monitor
+	Auction.EmployeeID = Employee.EmployeeID
+GROUP BY Auction.EmployeeID
 ORDER BY TotalGenerated DESC
 LIMIT 1;
 
