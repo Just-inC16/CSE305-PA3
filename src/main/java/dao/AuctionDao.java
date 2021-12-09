@@ -86,8 +86,7 @@ public class AuctionDao {
 		try {
 			ResultSet rs = Jdbc.newStatement(
 				"SELECT * \n" +
-				"FROM Auction\n" +
-				"WHERE Auction.customerID;");
+				"FROM Auction;");
 
 			while(rs.next()) {
 				Auction auction = new Auction();

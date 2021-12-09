@@ -103,14 +103,14 @@ CREATE TABLE Auction (
     AuctionID INT NOT NULL,
 	BidIncrement float4, 
 	MinimumBid float4,
-	Copies_Sold INTEGER,
+	CopiesSold INTEGER,
 	Monitor INTEGER,
 	ClosingBid INTEGER,
     CurrentBid INTEGER,
 	CurrentHighBid INTEGER,
 	ReservePrice INTEGER,
 	ItemID INT NOT NULL,
-	EmployeeID CHAR(20) NOT NULL,
+	EmployeeID CHAR(12),
     
 	    
 	PRIMARY KEY (AuctionID),
