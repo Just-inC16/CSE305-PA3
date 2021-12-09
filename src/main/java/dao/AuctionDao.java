@@ -83,18 +83,27 @@ public class AuctionDao {
 		 */
 		
 		/*Sample data begins*/
-		for (int i = 0; i < 5; i++) {
-			Auction auction = new Auction();
-			auction.setAuctionID(1);
-			auction.setBidIncrement(10);
-			auction.setMinimumBid(10);
-			auction.setCopiesSold(12);
-			auction.setItemID(1234);
-			auction.setClosingBid(120);
-			auction.setCurrentBid(120);
-			auction.setCurrentHighBid(120);
-			auction.setReserve(10);
-			auctions.add(auction);
+		try {
+			ResultSet rs = Jdbc.newStatement(
+				"SELECT * \n" +
+				"FROM Auction\n" +
+				"WHERE Auction.customerID;");
+
+			while(rs.next()) {
+				Auction auction = new Auction();
+				auction.setAuctionID(rs.getInt("AuctionID"));
+				auction.setBidIncrement(rs.getFloat("BidIncrement"));
+				auction.setMinimumBid(rs.getFloat("MinimumBid"));
+				auction.setCopiesSold(rs.getInt("Copies_Sold"));
+				auction.setItemID(rs.getInt("ItemID"));
+				auction.setClosingBid(rs.getInt("ClosingBid"));
+				auction.setCurrentBid(rs.getInt("CurrentBid"));
+				auction.setCurrentHighBid(rs.getInt("CurrentHighBid"));
+				auction.setReserve(rs.getInt("ReservePrice"));
+				auctions.add(auction);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
 		/*Sample data ends*/
 		

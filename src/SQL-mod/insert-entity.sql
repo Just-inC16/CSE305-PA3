@@ -67,14 +67,30 @@ VALUES
     BidIncrement DECIMAL(18, 2),      
     EmployeeID INTEGER NOT NULL,	
 	ItemID INTEGER NOT NULL*/
+-- AuctionID INT NOT NULL,
+-- 	BidIncrement float4, 
+-- 	MinimumBid float4,
+-- 	Copies_Sold INTEGER,
+-- 	Monitor INTEGER,
+-- 	ClosingBid INTEGER,
+--     CurrentBid INTEGER,
+-- 	CurrentHighBid INTEGER,
+-- 	ReservePrice INTEGER,
+-- 	ItemID INT NOT NULL,
+-- 	EmployeeID CHAR(20) NOT NULL,
+-- INSERT INTO Auction(AuctionID, Monitor, ItemID, Copies_Sold, MinimumBid, ReservePrice, BidIncrement, ClosingBid, CurrentBid, CurrentHighBid)
 INSERT INTO Auction(AuctionID, Monitor, ItemID, Copies_Sold, MinimumBid, ReservePrice, BidIncrement, ClosingBid, CurrentBid, CurrentHighBid)
 VALUES
-	(1, "200-00-0000", 1, 2, 5.50, 15.00, 0.50, 13.50, 13.50, 13.50),
-    (2, "200-00-0000", 2, 1, 14620.00, 20000.00, 100.00, 16720.00, 16720.00 ,16720.00),
-    (3, "300-00-0000", 3, 1, 900.00, 1500.00, 25.00, 1150.00, 1150.00, 1150.00),
-    (4, "300-00-0000", 4, 1, 1800.00, 3000.00, 25.00, 2175.00, 2175.00, 2175.00),
-	(5, "300-00-0000", 5, 1, 1400.00, 2000.00, 25.00, 1800.00, 1800.00, 1800.00),
-    (6, "200-00-0000", 1, 2, 5.50, 15.00, 0.50, 10.50, 10.50, 10.50);
+	(1, 123, "jusch",2.0, 5.50, 15, 50, 200000000,30,25,26),
+    (2, 456,"ben10", 1.0, 14620.00, 20000, 100, 200000000,31,25,26),
+    (3, 789,"dan", 1.0, 14620.00, 20000, 100, 200000000,31,25,26),
+    (4, 1011,"junho", 1.0, 14620.00, 20000, 100, 200000000,31,25,26);
+-- 	(1, "200-00-0000", 1, 2, 5.50, 15.00, 0.50, 13.50, 13.50, 13.50),
+--     (2, "200-00-0000", 2, 1, 14620.00, 20000.00, 100.00, 16720.00, 16720.00 ,16720.00),
+--     (3, "300-00-0000", 3, 1, 900.00, 1500.00, 25.00, 1150.00, 1150.00, 1150.00),
+--     (4, "300-00-0000", 4, 1, 1800.00, 3000.00, 25.00, 2175.00, 2175.00, 2175.00),
+-- 	(5, "300-00-0000", 5, 1, 1400.00, 2000.00, 25.00, 1800.00, 1800.00, 1800.00),
+--     (6, "200-00-0000", 1, 2, 5.50, 15.00, 0.50, 10.50, 10.50, 10.50);
 	
 -- 9] Add post
 /* 	Post data
