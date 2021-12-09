@@ -136,26 +136,75 @@ public class AuctionDao {
 		 */
 
 		/*Sample data begins*/
-		for (int i = 0; i < 4; i++) {
-			item.setItemID(123);
-			item.setDescription("sample description");
-			item.setType("BOOK");
-			item.setName("Sample Book");
 
-			bid.setCustomerID("123-12-1234");
-			bid.setBidPrice(120);
+//		item.setItemID(123);
+//		item.setDescription("sample description");
+//		item.setType("BOOK");
+//		item.setName("Sample Book");
+//
+//		bid.setCustomerID("123-12-1234");
+//		bid.setBidPrice(120);
+//
+//		customer.setCustomerID("123-12-1234");
+//		customer.setFirstName("Shiyong");
+//		customer.setLastName("Lu");
+//
+//		auction.setMinimumBid(100);
+//		auction.setBidIncrement(10);
+//		auction.setCurrentBid(110);
+//		auction.setCurrentHighBid(115);
+//		auction.setAuctionID(Integer.parseInt(auctionID));
 
-			customer.setCustomerID("123-12-1234");
-			customer.setFirstName("Shiyong");
-			customer.setLastName("Lu");
+		System.out.println("Item ID: " + itemID + " Auction ID: " + auctionID);
 
-			auction.setMinimumBid(100);
-			auction.setBidIncrement(10);
-			auction.setCurrentBid(110);
-			auction.setCurrentHighBid(115);
-			auction.setAuctionID(Integer.parseInt(auctionID));
+
+		try {
+			//Fetch Auction information based on AuctionId
+			ResultSet rs = Jdbc.newStatement(
+					"SELECT * FROM Auction "+
+					"WHERE Auction.AuctionID = "+ Integer.parseInt(auctionID) + ";");
+
+			while (rs.next()){
+				System.out.println(rs.getFetchSize());
+				auction.setMinimumBid(rs.getInt("MinimumBid"));
+				auction.setBidIncrement(rs.getFloat("BidIncrement"));
+				auction.setCurrentBid(rs.getInt("CurrentBid"));
+				auction.setCurrentHighBid(rs.getInt("CurrentHighBid"));
+				auction.setAuctionID(rs.getInt("AuctionID"));
+			}
+
+			//Fetch ItemID information based on ItemId
+			rs = Jdbc.newStatement(
+					"SELECT *  FROM Item WHERE Item.ItemID;");
+			while (rs.next()) {
+				item.setItemID(rs.getInt("ItemID"));
+				item.setDescription(rs.getString("Description"));
+				item.setType(rs.getString("Type"));
+				item.setName(rs.getString("Name"));
+			}
+
+			// System.out.println("getAuctionID: " + auction.getAuctionID());
+
+			//Fetch Bid details
+			rs = Jdbc.newStatement(
+					"SELECT * FROM Bid;");
+			while (rs.next()) {
+				bid.setCustomerID(rs.getString("CustomerID"));
+				bid.setBidPrice(rs.getFloat("BidPrice"));
+			}
+
+			//Fetch Customer information
+			rs = Jdbc.newStatement(
+					"SELECT * FROM Customer;");
+			while (rs.next()) {
+				customer.setCustomerID(rs.getString("CustomerID"));
+				customer.setFirstName(rs.getString("FirstName"));
+				customer.setLastName(rs.getString("LastName"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
-		/*Sample data ends*/
+
 
 		output.add(item);
 		output.add(bid);
