@@ -57,7 +57,7 @@ public class PostDao {
 			while(rs.next()) {
 				Item item=new Item();
 				item.setName(rs.getString("Name"));
-				item.setSoldPrice(rs.getFloat("BidPrice"));
+				item.setSoldPrice(rs.getInt("BidPrice"));
 				items.add(item);
 			}
 		} catch(Exception e) {
