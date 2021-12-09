@@ -34,13 +34,13 @@ VALUES
     ("shlu@ic.sunysb.edu", "123", "customer"),
     ("phlew@cs.sunysb.edu", "123", "customer"),
     ("robkelly@cs.sunysb.edu", "123", "customer"),
-    ("jl@gmail.com","jl123","customer"),
+    ("jl@gmail.com","123","customer"),
     
 	("emp1@sunysb.edu", "123", "manager"),
     ("emp2@sunysb.edu", "123", "customerRepresentative"),
     ("emp3@sunysb.edu", "123", "customerRepresentative"),
-	("jc@gmail.com","jc123","manager"),
-    ("dl@gmail.com","dl123","customerRepresentative");
+	("jc@gmail.com","123","manager"),
+    ("dl@gmail.com","123","customerRepresentative");
 
 -- Add item
 /* 	Item data

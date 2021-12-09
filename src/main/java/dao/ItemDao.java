@@ -224,13 +224,14 @@ public class ItemDao {
 		 */
 
 		System.out.println("*************** getItemsBySeller() ***************");
+		System.out.println("Seller: " + sellerID);
 		List output = new ArrayList();
 		List<Item> items = new ArrayList<Item>();
 		List<Bid> bids = new ArrayList<Bid>();
 		List<Auction> auctions = new ArrayList<Auction>();
 		
 		/*Sample data begins*/
-		for (int i = 0; i < 2; i++) {
+		/* for (int i = 0; i < 2; i++) {
 			Item item = new Item();
 			item.setItemID(123);						// printed
 			item.setDescription("sample description");	// printed
@@ -248,25 +249,24 @@ public class ItemDao {
 			bid.setCustomerID("123-12-1234");	// printed
 			bid.setBidPrice(120);				// hidden
 			bids.add(bid);
-		}
+		}*/
 
 		// ADDED
 		try {
 			ResultSet rs = Jdbc.newStatement(
-	"SELECT I.*, A.*, P.*\n" +
-				"FROM Item as I, Auction as A, Post as P\n" +
+	"SELECT I.*, A.*, P.*, B.*, MAX(B.BidPrice) as maxPrice\n" +
+				"FROM Item as I, Auction as A, Post as P, Bid as B\n" +
 				"WHERE \n" +
 				"\tI.ItemID = A.ItemID AND\n" +
 				"\tA.AuctionID = P.AuctionID AND \n" +
-				"\tP.CustomerID = \""+ sellerID +"\";");
+				"    B.AuctionID = A.AuctionID AND" +
+				"\tP.CustomerID = \""+ sellerID +"\" GROUP BY A.AuctionID ;");
 
 			while(rs.next()) {
 				Item item = new Item();
 				item.setItemID(rs.getInt("ItemID"));
-				item.setName(rs.getString("Name"));
 				item.setType(rs.getString("Type"));
-				item.setYearManufactured(rs.getInt("Manufactured"));
-				item.setNumCopies(rs.getInt("NumCopies"));
+				item.setName(rs.getString("Name"));
 				item.setDescription(rs.getString("Description"));
 				items.add(item);
 
@@ -274,19 +274,11 @@ public class ItemDao {
 				auction.setAuctionID(rs.getInt("AuctionID"));
 				auction.setBidIncrement(rs.getFloat("BidIncrement"));
 				auction.setMinimumBid(rs.getFloat("MinimumBid"));
-				auction.setCopiesSold(rs.getInt("Copies_Sold"));
-				auction.setItemID(rs.getInt("ItemID"));
-				auction.setClosingBid(rs.getInt("ClosingBid"));
-				auction.setCurrentBid(rs.getInt("CurrentBid"));
-				auction.setCurrentHighBid(rs.getInt("CurrentHighBid"));
-				auction.setReserve(rs.getInt("ReservePrice"));
 				auctions.add(auction);
 
 				Bid bid = new Bid();
-				bid.setAuctionID(rs.getInt("AuctionID"));
-				bid.setCustomerID(rs.getString("CustomerId"));
-				bid.setBidTime(rs.getString("BidTime"));
-				bid.setBidPrice(rs.getFloat("BidPrice"));
+				 bid.setCustomerID(rs.getString("CustomerId"));
+				bid.setBidPrice(rs.getFloat("maxPrice"));
 				bids.add(bid);
 			}
 		} catch (SQLException e) {
