@@ -1,3 +1,5 @@
 apache-tomcat-9.0.46
 mysql-connector-java-8.0.27
 *.xml
+/target/
+target/m2e-wtp/web-resources/META-INF/maven/com.cse305/Jsp/pom.properties
