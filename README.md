@@ -1,4 +1,4 @@
-# Principles of Database Systems
+# ebay2.0
 ### Team Member names: Jun Ho Lee, Daniel Lee, Justin Chan 
 
 ### Name of online auction house: eBay 2.0
