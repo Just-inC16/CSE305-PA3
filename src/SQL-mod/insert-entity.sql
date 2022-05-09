@@ -10,8 +10,10 @@ VALUES
     ("000-00-0003", "Smith", "John", "789 Peace Blvd", "Los Angeles", "CA", 12345, "(412)443-5321", "shlu@ic.sunysb.edu", 1, 2345678923456789),
     ("000-00-0004", "Lewis", "Phil", "135 Knowledge Lane", "Cider Lane", "NY", 11794, "(516)568-1858", "phlew@cs.sunysb.edu", 1, 6789234567892345),
     ("000-00-0005", "Rollin", "Sonny", "420 Moon Base", "Wall Street", "NC", 11794, "(410)357-7862", "robkelly@cs.sunysb.edu", 1, 4554854155148617),
-    ("000-00-0006", "Lee", "Jun Ho", "Roth, Gershwin", "Stony Brook", "NY", 12795, "(777)777-7777", "jl@gmail.com", 1, 9874620458962049);
-
+    ("000-00-0006", "Lee", "Jun Ho", "Roth, Gershwin", "Stony Brook", "NY", 12795, "(777)777-7777", "jl@gmail.com", 1, 9874620458962049),
+    ("000-00-0007", "Chan","Justin Chan", "123 Success Street", "Stony Brook", "NY", 11790, "(516)632-8959", "jc@g",18, "1234-5678-1234-5678"),
+	("000-00-0008", "Lee","Daniel Lee", "123 Success Street", "Stony Brook", "NY", 11790, "(516)632-8959", "dl@g", 21,"1234-5678-1234-5678");
+	
 -- 1] Add employee info
 /* Employee data
 	StartDate DATE,		-- 'yyyy-mm-dd'

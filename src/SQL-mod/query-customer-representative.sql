@@ -39,3 +39,5 @@ SELECT B.*
 FROM ItemTypeCustomerBought as I, BestSellerItemByItemType as B
 WHERE I.Type = B.Type AND CustomerID = "000-00-0005"; -- (?) provided
 
+SELECT * from BestSellerItemByItemType;
+select * from item; 
