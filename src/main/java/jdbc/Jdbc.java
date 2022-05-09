@@ -5,7 +5,7 @@ import java.sql.*;
 public class Jdbc {
 	public static String DB_URL = "jdbc:mysql://localhost:3306/cse305pa3";
 	public static String USER = "root";
-	public static String PASS = ""; // password here
+	public static String PASS = "3719"; 
 	public static Statement base() {
 		Statement st = null;
 		Connection con;
@@ -23,7 +23,7 @@ public class Jdbc {
 	}
 	
 	public static ResultSet newStatement(String queryStatement) {
-		Statement baseStatement;
+		Statement baseStatement = null;
 		ResultSet rs = null;
 		
 		try {
@@ -34,17 +34,11 @@ public class Jdbc {
 		catch(Exception e) {
 			System.out.println(e);
 		}
-//		finally {
-//			try { rs.close(); } catch (Exception e) { /* Ignored */ }
-//		    try { st.close(); } catch (Exception e) { /* Ignored */ }
-//		    try { con.close(); } catch (Exception e) { /* Ignored */ }
-//		}
 		return rs;
 	}
 	
-	public static void deleteStatement(String queryStatement) {	
+	public static void modifyStatement(String queryStatement) {	
 		Statement baseStatement=null;
-//		ResultSet rs = null;
 		try {
 			baseStatement= base();
 			baseStatement.executeUpdate(queryStatement);	
@@ -52,23 +46,5 @@ public class Jdbc {
 		catch(Exception e) {
 			System.out.println(e);
 		}
-//		finally {
-//			try { rs.close(); } catch (Exception e) { /* Ignored */ }
-//		    try { st.close(); } catch (Exception e) { /* Ignored */ }
-//		    try { con.close(); } catch (Exception e) { /* Ignored */ }
-//		}
-//		return rs;
-		
 	}
-//	public static void insertStatement(String queryStatement) {
-//		Statement baseStatement=null;
-////		ResultSet rs = null;
-//		try {
-//			baseStatement= base();
-//			baseStatement.createStatement(queryStatement);	
-//		}
-//		catch(Exception e) {
-//			System.out.println(e);
-//		}
-//	}
 }

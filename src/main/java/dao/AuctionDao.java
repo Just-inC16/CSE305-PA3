@@ -15,32 +15,13 @@ public class AuctionDao {
 
 	// C ADDED]
 	public List<Auction> getAllAuctions() {
-		
-		System.out.println("*************** getAllAuctions() ***************");
-		List<Auction> auctions = new ArrayList<Auction>();
-		
 		/*
 		 * The students code to fetch data from the database will be written here
 		 * Each record is required to be encapsulated as a "Auction" class object and added to the "auctions" ArrayList
 		 * Query to get data about all the auctions should be implemented
 		 */
-		
-		/*Sample data begins*/
-		/*for (int i = 0; i < 10; i++) {
-			Auction auction = new Auction();
-			auction.setAuctionID(1 + i);
-			auction.setBidIncrement(10+ i);
-			auction.setMinimumBid(10+ i);
-			auction.setCopiesSold(12+ i);
-			auction.setItemID(1234+ i);
-			auction.setClosingBid(120+ i);
-			auction.setCurrentBid(120+ i);
-			auction.setCurrentHighBid(120+ i);
-			auction.setReserve(10+ i);
-			auctions.add(auction);
-		}*/
-
-		// ADDED
+		System.out.println("*************** getAllAuctions() ***************");
+		List<Auction> auctions = new ArrayList<Auction>();
 		try {
 			ResultSet rs = Jdbc.newStatement(
 	"SELECT * \n" +
@@ -63,8 +44,6 @@ public class AuctionDao {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		/*Sample data ends*/
-		
 		return auctions;
 
 	}
@@ -90,6 +69,7 @@ public class AuctionDao {
 
 			while(rs.next()) {
 				Auction auction = new Auction();
+				
 				auction.setAuctionID(rs.getInt("AuctionID"));
 				auction.setBidIncrement(rs.getFloat("BidIncrement"));
 				auction.setMinimumBid(rs.getFloat("MinimumBid"));
@@ -99,6 +79,7 @@ public class AuctionDao {
 				auction.setCurrentBid(rs.getInt("CurrentBid"));
 				auction.setCurrentHighBid(rs.getInt("CurrentHighBid"));
 				auction.setReserve(rs.getInt("ReservePrice"));
+				
 				auctions.add(auction);
 			}
 		} catch (SQLException e) {
@@ -112,12 +93,7 @@ public class AuctionDao {
 	// C Items sold by Seller -> View Item -> Bid
 	public List getAuctionData(String auctionID, String itemID) {
 
-		System.out.println("*************** getAuctionData() ***************");
-		List output = new ArrayList();
-		Item item = new Item();
-		Bid bid = new Bid();
-		Auction auction = new Auction();
-		Customer customer = new Customer();
+		
 
 		/*
 		 * The students code to fetch data from the database will be written here
@@ -134,29 +110,13 @@ public class AuctionDao {
 		 * The auction details must include details about the item, indicated by auctionID
 		 * All the objects must be added in the "output" list and returned
 		 */
-
-		/*Sample data begins*/
-
-//		item.setItemID(123);
-//		item.setDescription("sample description");
-//		item.setType("BOOK");
-//		item.setName("Sample Book");
-//
-//		bid.setCustomerID("123-12-1234");
-//		bid.setBidPrice(120);
-//
-//		customer.setCustomerID("123-12-1234");
-//		customer.setFirstName("Shiyong");
-//		customer.setLastName("Lu");
-//
-//		auction.setMinimumBid(100);
-//		auction.setBidIncrement(10);
-//		auction.setCurrentBid(110);
-//		auction.setCurrentHighBid(115);
-//		auction.setAuctionID(Integer.parseInt(auctionID));
-
+		System.out.println("*************** getAuctionData() ***************");
+		List output = new ArrayList();
+		Item item = new Item();
+		Bid bid = new Bid();
+		Auction auction = new Auction();
+		Customer customer = new Customer();
 		System.out.println("Item ID: " + itemID + " Auction ID: " + auctionID);
-
 
 		try {
 			//Fetch Auction information based on AuctionId
@@ -183,8 +143,6 @@ public class AuctionDao {
 				item.setName(rs.getString("Name"));
 			}
 
-			// System.out.println("getAuctionID: " + auction.getAuctionID());
-
 			//Fetch Bid details
 			rs = Jdbc.newStatement(
 					"SELECT * FROM Bid;");
@@ -204,7 +162,6 @@ public class AuctionDao {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-
 
 		output.add(item);
 		output.add(bid);
@@ -253,9 +210,6 @@ public class AuctionDao {
 		}
 		
 		return auctions;
-
-		
-		
 	}
 
 	// CR Record a Sale -> Record the Sale
@@ -268,8 +222,6 @@ public class AuctionDao {
 		 */
 		
 		System.out.println("*************** recordSale() ***************");
-		/* Sample data begins */
 		return "success";
-		/* Sample data ends */
 	}
 }

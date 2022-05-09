@@ -81,8 +81,6 @@ public class BidDao {
 		} catch(Exception e) {
 			System.out.println(e);
 		}
-		/*Sample data ends*/
-		
 		return bids;
 	}
 
@@ -103,13 +101,6 @@ public class BidDao {
 		 * After inserting the bid data, return the bid details encapsulated in "bid" object
 		 */
 
-		/*Sample data begins*/
-//		bid.setAuctionID(auctionID);
-//		bid.setCustomerID(customerID);
-//		bid.setBidTime("2008-12-11");
-//		bid.setBidPrice(currentBid);
-		/*Sample data ends*/
-
 		// 1 Add ‘maxBid’ attribute to schema
 		try{
 			DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
@@ -118,7 +109,7 @@ public class BidDao {
 			String queryStatement =
 				"INSERT INTO Bid(customerID, auctionID, bidTime, bidPrice) "
 				+ "VALUES ('"+ customerID+"', '"+ auctionID +"','"+ dtf.format(now) +"','"+ currentBid +"')";
-			Jdbc.deleteStatement(queryStatement);
+			Jdbc.modifyStatement(queryStatement);
 
 			bid.setAuctionID(Integer.parseInt(auctionID));
 			bid.setCustomerID(customerID);
@@ -127,7 +118,7 @@ public class BidDao {
 
 			String updateStatement = "UPDATE Auction SET CurrentHighBid = " + currentBid + " WHERE " +
 					"AuctionID = " + auctionID + " AND CurrentHighBid < " + currentBid + ";";
-			Jdbc.deleteStatement(updateStatement);
+			Jdbc.modifyStatement(updateStatement);
 
 		} catch(Exception e) {
 			System.out.println(e);
